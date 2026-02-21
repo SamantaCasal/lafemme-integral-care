@@ -26,7 +26,7 @@ const Hero = () => {
             <Button asChild size="lg">
               <Link to="/turnos">Agendar turno</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10 hover:text-white hover:border-white/60">
+            <Button asChild size="lg" variant="outline" className="bg-white/90 border-white/40 text-foreground hover:bg-white hover:text-foreground hover:border-white/60">
               <Link to="/especialidades">Ver especialidades</Link>
             </Button>
           </div>
