@@ -6,6 +6,7 @@ import {
   ClipboardCheck, Heart, GraduationCap, Baby, Activity,
   Dumbbell, Sparkles, Apple, Brain,
 } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const iconMap: Record<string, React.ElementType> = {
   ClipboardCheck, Heart, GraduationCap, Baby, Activity,
@@ -14,6 +15,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 const Especialidades = () => {
   const [filter, setFilter] = useState("todas");
+  const { t } = useLanguage();
 
   const filtered = filter === "todas" ? services : services.filter((s) => s.category === filter);
 
@@ -22,10 +24,10 @@ const Especialidades = () => {
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">
-            Nuestras Especialidades
+            {t("specialties.page_title")}
           </h1>
           <p className="text-muted-foreground text-center mb-10 max-w-xl mx-auto">
-            Servicios diseñados para acompañarte en cada etapa con un enfoque integral y personalizado.
+            {t("specialties.page_subtitle")}
           </p>
 
           <div className="flex flex-wrap justify-center gap-2 mb-12">
@@ -39,7 +41,7 @@ const Especialidades = () => {
                     : "bg-accent text-accent-foreground hover:bg-primary/10"
                 }`}
               >
-                {cat.label}
+                {t(`cat.${cat.value}`)}
               </button>
             ))}
           </div>
@@ -57,13 +59,13 @@ const Especialidades = () => {
                     <Icon size={22} className="text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                   </div>
                   <span className="inline-block text-xs font-medium text-primary bg-accent/60 px-2 py-0.5 rounded-full capitalize">
-                    {service.category}
+                    {t(`cat.${service.category}`)}
                   </span>
                   <h3 className="font-serif text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{service.shortDescription}</p>
-                  <span className="text-sm text-primary font-medium">Ver más →</span>
+                  <span className="text-sm text-primary font-medium">{t("specialties.view_more")}</span>
                 </Link>
               );
             })}

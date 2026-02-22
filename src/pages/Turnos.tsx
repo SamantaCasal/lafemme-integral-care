@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MessageCircle } from "lucide-react";
 import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY } from "@/data/team";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const Turnos = () => {
+  const { t } = useLanguage();
   const [form, setForm] = useState({
     nombre: "",
     etapa: "",
@@ -21,13 +23,13 @@ const Turnos = () => {
   };
 
   const handleWhatsApp = () => {
-    const text = `Hola, quiero agendar un turno en La Femme.\n\nNombre: ${form.nombre}\nEtapa: ${form.etapa}\nEspecialidad: ${form.especialidad}\nProfesional: ${form.profesional}\nPreferencia de fecha: ${form.fecha}\nMensaje: ${form.mensaje}`;
+    const text = `${t("appointment.wa_text")}\n\n${t("turnos.name_label")}: ${form.nombre}\n${t("turnos.stage_label")}: ${form.etapa}\n${t("turnos.specialty_label")}: ${form.especialidad}\n${t("turnos.professional_label")}: ${form.profesional}\n${t("turnos.date_label")}: ${form.fecha}\n${t("turnos.message_label")}: ${form.mensaje}`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("¡Gracias! Tu solicitud fue enviada (mock). Te contactaremos a la brevedad.");
+    alert(t("turnos.success"));
   };
 
   return (
@@ -35,66 +37,66 @@ const Turnos = () => {
       <section className="py-16 md:py-24 bg-background">
         <div className="container max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">
-            Agendá tu turno
+            {t("turnos.title")}
           </h1>
           <p className="text-muted-foreground text-center mb-10">
-            Completá el formulario o escribinos directamente por WhatsApp al {WHATSAPP_DISPLAY}.
+            {t("turnos.subtitle_prefix")} {WHATSAPP_DISPLAY}.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="nombre" className="block text-sm font-medium text-foreground mb-1">Nombre y apellido</label>
-              <Input id="nombre" name="nombre" value={form.nombre} onChange={handleChange} required placeholder="Tu nombre completo" />
+              <label htmlFor="nombre" className="block text-sm font-medium text-foreground mb-1">{t("turnos.name_label")}</label>
+              <Input id="nombre" name="nombre" value={form.nombre} onChange={handleChange} required placeholder={t("turnos.name_placeholder")} />
             </div>
 
             <div>
-              <label htmlFor="etapa" className="block text-sm font-medium text-foreground mb-1">Etapa</label>
+              <label htmlFor="etapa" className="block text-sm font-medium text-foreground mb-1">{t("turnos.stage_label")}</label>
               <select
                 id="etapa" name="etapa" value={form.etapa} onChange={handleChange}
                 className="w-full h-10 px-3 rounded-md border border-input bg-background text-foreground text-sm"
               >
-                <option value="">Seleccioná tu etapa</option>
-                <option value="Embarazo">Embarazo</option>
-                <option value="Posparto">Posparto</option>
-                <option value="Menopausia">Menopausia</option>
+                <option value="">{t("turnos.stage_placeholder")}</option>
+                <option value="Embarazo">{t("turnos.stage_pregnancy")}</option>
+                <option value="Posparto">{t("turnos.stage_postpartum")}</option>
+                <option value="Menopausia">{t("turnos.stage_menopause")}</option>
               </select>
             </div>
 
             <div>
-              <label htmlFor="especialidad" className="block text-sm font-medium text-foreground mb-1">Especialidad</label>
-              <Input id="especialidad" name="especialidad" value={form.especialidad} onChange={handleChange} placeholder="Ej: Evaluación postparto, lactancia..." />
+              <label htmlFor="especialidad" className="block text-sm font-medium text-foreground mb-1">{t("turnos.specialty_label")}</label>
+              <Input id="especialidad" name="especialidad" value={form.especialidad} onChange={handleChange} placeholder={t("turnos.specialty_placeholder")} />
             </div>
 
             <div>
-              <label htmlFor="profesional" className="block text-sm font-medium text-foreground mb-1">Profesional</label>
+              <label htmlFor="profesional" className="block text-sm font-medium text-foreground mb-1">{t("turnos.professional_label")}</label>
               <select
                 id="profesional" name="profesional" value={form.profesional} onChange={handleChange}
                 className="w-full h-10 px-3 rounded-md border border-input bg-background text-foreground text-sm"
               >
-                <option value="">Seleccioná profesional</option>
-                <option value="Obstetra">Obstetra</option>
-                <option value="Nutricionista">Nutricionista</option>
-                <option value="Psicóloga">Psicóloga</option>
+                <option value="">{t("turnos.professional_placeholder")}</option>
+                <option value="Obstetra">{t("turnos.prof_obstetra")}</option>
+                <option value="Nutricionista">{t("turnos.prof_nutricionista")}</option>
+                <option value="Psicóloga">{t("turnos.prof_psicologa")}</option>
               </select>
             </div>
 
             <div>
-              <label htmlFor="fecha" className="block text-sm font-medium text-foreground mb-1">Preferencia de fecha/horario</label>
-              <Input id="fecha" name="fecha" value={form.fecha} onChange={handleChange} placeholder="Ej: Lunes a la tarde" />
+              <label htmlFor="fecha" className="block text-sm font-medium text-foreground mb-1">{t("turnos.date_label")}</label>
+              <Input id="fecha" name="fecha" value={form.fecha} onChange={handleChange} placeholder={t("turnos.date_placeholder")} />
             </div>
 
             <div>
-              <label htmlFor="mensaje" className="block text-sm font-medium text-foreground mb-1">Mensaje (opcional)</label>
-              <Textarea id="mensaje" name="mensaje" value={form.mensaje} onChange={handleChange} placeholder="Contanos si tenés alguna consulta..." rows={3} />
+              <label htmlFor="mensaje" className="block text-sm font-medium text-foreground mb-1">{t("turnos.message_label")}</label>
+              <Textarea id="mensaje" name="mensaje" value={form.mensaje} onChange={handleChange} placeholder={t("turnos.message_placeholder")} rows={3} />
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Button type="submit" size="lg" className="flex-1">
-                Enviar formulario
+                {t("turnos.submit")}
               </Button>
               <Button type="button" size="lg" variant="whatsapp" className="flex-1" onClick={handleWhatsApp}>
                 <MessageCircle size={18} />
-                Enviar por WhatsApp
+                {t("turnos.wa_send")}
               </Button>
             </div>
           </form>
