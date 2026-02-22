@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import directorImage from "@/assets/director-portrait.jpg";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const DirectorSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container">
@@ -20,23 +23,20 @@ const DirectorSection = () => {
 
           <div className="space-y-6 animate-fade-up delay-200">
             <span className="text-primary font-medium text-sm tracking-widest uppercase">
-              Directora · Obstetra
+              {t("director.label")}
             </span>
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-              Obst. Cyntia Martínez
+              {t("director.name")}
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Con más de [COMPLETAR] años de experiencia en salud femenina, Cyntia fundó La Femme 
-              con un propósito claro: ofrecer un espacio donde cada mujer se sienta escuchada, 
-              contenida y cuidada. Su enfoque combina la evidencia científica con una mirada 
-              profundamente humana, priorizando siempre el acompañamiento personalizado.
+              {t("director.bio")}
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild>
-                <Link to="/turnos">Agendá con la obstetra</Link>
+                <Link to="/turnos">{t("director.cta1")}</Link>
               </Button>
               <Button asChild variant="outline">
-                <Link to="/quienes-somos">Conocé al equipo</Link>
+                <Link to="/quienes-somos">{t("director.cta2")}</Link>
               </Button>
             </div>
           </div>

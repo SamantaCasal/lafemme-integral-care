@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import { testimonials } from "@/data/testimonials";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const TestimonialBanner = () => {
+  const { t } = useLanguage();
   const featured = testimonials[0];
 
   return (
@@ -10,7 +12,7 @@ const TestimonialBanner = () => {
       <Link to="/testimonios" className="block">
         <div className="container text-center space-y-4 hover:opacity-90 transition-opacity cursor-pointer">
           <p className="text-primary-foreground/80 text-sm font-medium tracking-widest uppercase">
-            Lo que dicen nuestras pacientes
+            {t("testimonials.banner_label")}
           </p>
           <blockquote className="max-w-2xl mx-auto">
             <p className="text-primary-foreground text-lg md:text-xl font-serif italic leading-relaxed">
@@ -26,7 +28,7 @@ const TestimonialBanner = () => {
             — {featured.name}, {featured.stage}
           </p>
           <p className="text-primary-foreground/60 text-xs mt-2">
-            Hacé clic para ver más testimonios →
+            {t("testimonials.banner_click")}
           </p>
         </div>
       </Link>

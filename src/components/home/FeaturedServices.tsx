@@ -4,6 +4,7 @@ import {
   ClipboardCheck, Heart, GraduationCap, Baby, Activity,
   Dumbbell, Sparkles, Apple, Brain,
 } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const iconMap: Record<string, React.ElementType> = {
   ClipboardCheck, Heart, GraduationCap, Baby, Activity,
@@ -11,6 +12,7 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 const FeaturedServices = () => {
+  const { t } = useLanguage();
   const featured = services.slice(0, 6);
 
   return (
@@ -18,10 +20,10 @@ const FeaturedServices = () => {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-            Especialidades destacadas
+            {t("services.title")}
           </h2>
           <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
-            Conocé nuestros servicios diseñados para cada etapa de tu vida.
+            {t("services.subtitle")}
           </p>
         </div>
 
@@ -45,7 +47,7 @@ const FeaturedServices = () => {
                   {service.shortDescription}
                 </p>
                 <span className="inline-block text-sm text-primary font-medium">
-                  Más información →
+                  {t("services.more_info")}
                 </span>
               </Link>
             );
@@ -57,7 +59,7 @@ const FeaturedServices = () => {
             to="/especialidades"
             className="text-primary font-medium hover:underline underline-offset-4"
           >
-            Ver todas las especialidades →
+            {t("services.view_all")}
           </Link>
         </div>
       </div>

@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { blogPosts } from "@/data/blog";
 import { CalendarDays, Clock } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const BlogPreview = () => {
+  const { t, lang } = useLanguage();
   const latest = blogPosts.slice(0, 3);
 
   return (
@@ -10,10 +12,10 @@ const BlogPreview = () => {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-            Blog
+            {t("blog.title")}
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Artículos y recursos para tu bienestar.
+            {t("blog.subtitle")}
           </p>
         </div>
 
@@ -37,7 +39,7 @@ const BlogPreview = () => {
                   {post.excerpt}
                 </p>
                 <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2">
-                  <span className="flex items-center gap-1"><CalendarDays size={12} />{new Date(post.date).toLocaleDateString("es-ES")}</span>
+                  <span className="flex items-center gap-1"><CalendarDays size={12} />{new Date(post.date).toLocaleDateString(lang === "es" ? "es-ES" : "en-US")}</span>
                   <span className="flex items-center gap-1"><Clock size={12} />{post.readTime}</span>
                 </div>
               </div>
@@ -47,7 +49,7 @@ const BlogPreview = () => {
 
         <div className="text-center mt-10">
           <Link to="/blog" className="text-primary font-medium hover:underline underline-offset-4">
-            Ver todos los artículos →
+            {t("blog.view_all")}
           </Link>
         </div>
       </div>

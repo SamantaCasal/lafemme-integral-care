@@ -6,17 +6,20 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const FAQ = () => {
+  const { t } = useLanguage();
+
   return (
     <Layout>
       <section className="py-16 md:py-24 bg-background">
         <div className="container max-w-3xl">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">
-            Preguntas Frecuentes
+            {t("faq.title")}
           </h1>
           <p className="text-muted-foreground text-center mb-12">
-            Encontrá respuestas a las consultas más comunes.
+            {t("faq.subtitle")}
           </p>
 
           <Accordion type="single" collapsible className="space-y-3">
