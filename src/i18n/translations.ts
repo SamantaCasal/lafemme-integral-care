@@ -133,7 +133,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     "contact.map_embed": "[Embed de Google Maps]",
     "contact.success": "¡Mensaje enviado! (mock). Te responderemos pronto.",
 
-    // Turnos page
+    // Turnos page (legacy)
     "turnos.title": "Agendá tu turno",
     "turnos.subtitle_prefix": "Completá el formulario o escribinos directamente por WhatsApp al",
     "turnos.name_label": "Nombre y apellido",
@@ -168,6 +168,95 @@ export const translations: Record<Lang, Record<string, string>> = {
     "cat.posparto": "Posparto",
     "cat.menopausia": "Menopausia",
     "cat.bienestar": "Bienestar",
+
+    // ========== BOOKING FLOW ==========
+    "booking.page_title": "Agendá tu turno",
+    "booking.page_subtitle": "Reservá tu consulta en pocos minutos. Simple, rápido y seguro.",
+
+    // Stepper labels
+    "booking.step1_label": "Servicio",
+    "booking.step2_label": "Profesional",
+    "booking.step3_label": "Fecha y hora",
+    "booking.step4_label": "Tus datos",
+    "booking.step5_label": "Confirmación",
+
+    // Step 1
+    "booking.step1_title": "Elegí tu servicio",
+    "booking.step1_desc": "Seleccioná la especialidad que necesitás.",
+    "booking.search_services": "Buscar servicio...",
+    "booking.no_services": "No se encontraron servicios.",
+    "booking.cat_all": "Todos",
+    "booking.cat_embarazo": "Embarazo",
+    "booking.cat_posparto": "Posparto",
+    "booking.cat_lactancia": "Lactancia",
+    "booking.cat_reeducacion": "Reeducación",
+    "booking.cat_spa": "Spa / Terapias",
+    "booking.cat_nutricion": "Nutrición",
+    "booking.cat_psicologia": "Psicología",
+
+    // Step 2
+    "booking.step2_title": "Elegí tu profesional",
+    "booking.step2_desc": "Seleccioná con quién querés atenderte.",
+    "booking.no_professionals": "No hay profesionales disponibles para este servicio.",
+
+    // Step 3
+    "booking.step3_title": "Elegí día y horario",
+    "booking.step3_desc": "Seleccioná la fecha y el horario que más te convenga.",
+    "booking.timezone_py": "Hora local (Paraguay — UTC-4)",
+    "booking.morning": "Mañana",
+    "booking.afternoon": "Tarde",
+    "booking.no_slots": "No hay horarios disponibles para este día. Probá otro día.",
+    "booking.select_date_first": "Seleccioná un día en el calendario para ver los horarios.",
+
+    // Step 4
+    "booking.step4_title": "Tus datos",
+    "booking.step4_desc": "Completá tus datos para confirmar la reserva.",
+    "booking.patient_name": "Nombre y Apellidos",
+    "booking.patient_name_ph": "Tu nombre completo",
+    "booking.patient_email": "Email",
+    "booking.patient_email_ph": "tucorreo@email.com",
+    "booking.patient_phone": "Celular",
+    "booking.patient_notes": "Notas (opcional)",
+    "booking.patient_notes_ph": "¿Querés contarnos algo antes de la consulta?",
+    "booking.needs_invoice": "¿Necesitás factura?",
+    "booking.invoice_name": "Nombre y Apellidos / Razón social",
+    "booking.invoice_name_ph": "Nombre o razón social para la factura",
+    "booking.error_required": "Este campo es obligatorio.",
+    "booking.error_email": "Ingresá un email válido.",
+    "booking.error_phone": "Ingresá un número de celular válido.",
+
+    // Step 5
+    "booking.step5_title": "Revisá y confirmá",
+    "booking.step5_desc": "Verificá los datos antes de confirmar tu reserva.",
+    "booking.confirm_booking": "Confirmar reserva",
+    "booking.error_generic": "Ocurrió un error al procesar tu reserva. Por favor intentá de nuevo.",
+
+    // Summary
+    "booking.summary_title": "Resumen de tu reserva",
+    "booking.summary_service": "Servicio",
+    "booking.summary_professional": "Profesional",
+    "booking.summary_date": "Fecha",
+    "booking.summary_time": "Hora",
+    "booking.summary_invoice": "Factura",
+    "booking.not_selected": "No seleccionado",
+    "booking.view_summary": "Ver resumen de tu reserva",
+    "booking.presencial": "Presencial",
+    "booking.duration": "Duración",
+
+    // Navigation
+    "booking.continue": "Continuar",
+    "booking.back": "Volver",
+
+    // Confirmed
+    "booking.confirmed_title": "¡Reserva confirmada!",
+    "booking.confirmed_subtitle": "Te enviamos los detalles por email. También podés compartir por WhatsApp.",
+    "booking.booking_number": "N° de reserva",
+    "booking.location": "Dirección",
+    "booking.arrive_early": "Te pedimos llegar 10 minutos antes de tu consulta.",
+    "booking.cancel_policy": "Para cambios o cancelaciones, contactanos por WhatsApp con al menos 24h de anticipación.",
+    "booking.add_calendar": "Agregar al calendario",
+    "booking.send_wa": "Enviar por WhatsApp",
+    "booking.go_home": "Volver al inicio",
   },
   en: {
     // Nav
@@ -301,7 +390,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     "contact.map_embed": "[Google Maps Embed]",
     "contact.success": "Message sent! (mock). We'll get back to you soon.",
 
-    // Turnos page
+    // Turnos page (legacy)
     "turnos.title": "Book Your Appointment",
     "turnos.subtitle_prefix": "Fill out the form or write to us directly on WhatsApp at",
     "turnos.name_label": "Full name",
@@ -336,5 +425,94 @@ export const translations: Record<Lang, Record<string, string>> = {
     "cat.posparto": "Postpartum",
     "cat.menopausia": "Menopause",
     "cat.bienestar": "Wellness",
+
+    // ========== BOOKING FLOW ==========
+    "booking.page_title": "Book Your Appointment",
+    "booking.page_subtitle": "Reserve your consultation in just a few minutes. Simple, fast and secure.",
+
+    // Stepper labels
+    "booking.step1_label": "Service",
+    "booking.step2_label": "Professional",
+    "booking.step3_label": "Date & Time",
+    "booking.step4_label": "Your Info",
+    "booking.step5_label": "Confirmation",
+
+    // Step 1
+    "booking.step1_title": "Choose your service",
+    "booking.step1_desc": "Select the specialty you need.",
+    "booking.search_services": "Search services...",
+    "booking.no_services": "No services found.",
+    "booking.cat_all": "All",
+    "booking.cat_embarazo": "Pregnancy",
+    "booking.cat_posparto": "Postpartum",
+    "booking.cat_lactancia": "Breastfeeding",
+    "booking.cat_reeducacion": "Rehabilitation",
+    "booking.cat_spa": "Spa / Therapies",
+    "booking.cat_nutricion": "Nutrition",
+    "booking.cat_psicologia": "Psychology",
+
+    // Step 2
+    "booking.step2_title": "Choose your professional",
+    "booking.step2_desc": "Select who you'd like to be seen by.",
+    "booking.no_professionals": "No professionals available for this service.",
+
+    // Step 3
+    "booking.step3_title": "Choose day & time",
+    "booking.step3_desc": "Select the date and time that works best for you.",
+    "booking.timezone_py": "Local time (Paraguay — UTC-4)",
+    "booking.morning": "Morning",
+    "booking.afternoon": "Afternoon",
+    "booking.no_slots": "No available time slots for this day. Try another day.",
+    "booking.select_date_first": "Select a day on the calendar to see available times.",
+
+    // Step 4
+    "booking.step4_title": "Your Information",
+    "booking.step4_desc": "Fill in your details to confirm the booking.",
+    "booking.patient_name": "Full Name",
+    "booking.patient_name_ph": "Your full name",
+    "booking.patient_email": "Email",
+    "booking.patient_email_ph": "your@email.com",
+    "booking.patient_phone": "Phone",
+    "booking.patient_notes": "Notes (optional)",
+    "booking.patient_notes_ph": "Would you like to tell us anything before your appointment?",
+    "booking.needs_invoice": "Do you need an invoice?",
+    "booking.invoice_name": "Full Name / Business Name",
+    "booking.invoice_name_ph": "Name or business name for the invoice",
+    "booking.error_required": "This field is required.",
+    "booking.error_email": "Please enter a valid email.",
+    "booking.error_phone": "Please enter a valid phone number.",
+
+    // Step 5
+    "booking.step5_title": "Review & Confirm",
+    "booking.step5_desc": "Verify your details before confirming your booking.",
+    "booking.confirm_booking": "Confirm Booking",
+    "booking.error_generic": "An error occurred while processing your booking. Please try again.",
+
+    // Summary
+    "booking.summary_title": "Booking Summary",
+    "booking.summary_service": "Service",
+    "booking.summary_professional": "Professional",
+    "booking.summary_date": "Date",
+    "booking.summary_time": "Time",
+    "booking.summary_invoice": "Invoice",
+    "booking.not_selected": "Not selected",
+    "booking.view_summary": "View booking summary",
+    "booking.presencial": "In-person",
+    "booking.duration": "Duration",
+
+    // Navigation
+    "booking.continue": "Continue",
+    "booking.back": "Back",
+
+    // Confirmed
+    "booking.confirmed_title": "Booking Confirmed!",
+    "booking.confirmed_subtitle": "We'll send you the details by email. You can also share via WhatsApp.",
+    "booking.booking_number": "Booking Number",
+    "booking.location": "Address",
+    "booking.arrive_early": "Please arrive 10 minutes before your appointment.",
+    "booking.cancel_policy": "For changes or cancellations, contact us via WhatsApp at least 24h in advance.",
+    "booking.add_calendar": "Add to Calendar",
+    "booking.send_wa": "Send via WhatsApp",
+    "booking.go_home": "Back to Home",
   },
 };
