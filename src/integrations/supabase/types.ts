@@ -14,7 +14,277 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      availability_exceptions: {
+        Row: {
+          end_time: string | null
+          exception_date: string
+          id: string
+          is_blocked: boolean
+          professional_id: string
+          reason: string | null
+          start_time: string | null
+        }
+        Insert: {
+          end_time?: string | null
+          exception_date: string
+          id?: string
+          is_blocked?: boolean
+          professional_id: string
+          reason?: string | null
+          start_time?: string | null
+        }
+        Update: {
+          end_time?: string | null
+          exception_date?: string
+          id?: string
+          is_blocked?: boolean
+          professional_id?: string
+          reason?: string | null
+          start_time?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "availability_exceptions_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      availability_templates: {
+        Row: {
+          day_of_week: number
+          end_time: string
+          id: string
+          is_active: boolean
+          professional_id: string
+          slot_duration_minutes: number
+          start_time: string
+        }
+        Insert: {
+          day_of_week: number
+          end_time: string
+          id?: string
+          is_active?: boolean
+          professional_id: string
+          slot_duration_minutes?: number
+          start_time: string
+        }
+        Update: {
+          day_of_week?: number
+          end_time?: string
+          id?: string
+          is_active?: boolean
+          professional_id?: string
+          slot_duration_minutes?: number
+          start_time?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "availability_templates_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bookable_services: {
+        Row: {
+          category: string
+          created_at: string
+          description_en: string
+          description_es: string
+          duration_minutes: number
+          id: string
+          is_active: boolean
+          modality: string
+          name_en: string
+          name_es: string
+          price_guaranies: number
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description_en?: string
+          description_es?: string
+          duration_minutes?: number
+          id?: string
+          is_active?: boolean
+          modality?: string
+          name_en?: string
+          name_es: string
+          price_guaranies?: number
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description_en?: string
+          description_es?: string
+          duration_minutes?: number
+          id?: string
+          is_active?: boolean
+          modality?: string
+          name_en?: string
+          name_es?: string
+          price_guaranies?: number
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      bookings: {
+        Row: {
+          booking_date: string
+          booking_number: string
+          booking_time: string
+          cancel_token: string | null
+          created_at: string
+          duration_minutes: number
+          id: string
+          invoice_name: string | null
+          invoice_ruc: string | null
+          needs_invoice: boolean
+          patient_email: string
+          patient_name: string
+          patient_notes: string | null
+          patient_phone: string
+          price_guaranies: number
+          professional_id: string
+          service_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          booking_date: string
+          booking_number: string
+          booking_time: string
+          cancel_token?: string | null
+          created_at?: string
+          duration_minutes: number
+          id?: string
+          invoice_name?: string | null
+          invoice_ruc?: string | null
+          needs_invoice?: boolean
+          patient_email: string
+          patient_name: string
+          patient_notes?: string | null
+          patient_phone: string
+          price_guaranies: number
+          professional_id: string
+          service_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          booking_date?: string
+          booking_number?: string
+          booking_time?: string
+          cancel_token?: string | null
+          created_at?: string
+          duration_minutes?: number
+          id?: string
+          invoice_name?: string | null
+          invoice_ruc?: string | null
+          needs_invoice?: boolean
+          patient_email?: string
+          patient_name?: string
+          patient_notes?: string | null
+          patient_phone?: string
+          price_guaranies?: number
+          professional_id?: string
+          service_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "bookable_services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      professional_services: {
+        Row: {
+          id: string
+          professional_id: string
+          service_id: string
+        }
+        Insert: {
+          id?: string
+          professional_id: string
+          service_id: string
+        }
+        Update: {
+          id?: string
+          professional_id?: string
+          service_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_services_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "professional_services_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "bookable_services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      professionals: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          photo_url: string | null
+          role_en: string
+          role_es: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          photo_url?: string | null
+          role_en?: string
+          role_es?: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          photo_url?: string | null
+          role_en?: string
+          role_es?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
