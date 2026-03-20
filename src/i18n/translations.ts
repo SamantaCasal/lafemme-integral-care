@@ -19,16 +19,16 @@ export const translations: Record<Lang, Record<string, string>> = {
     "hero.specialties": "Ver especialidades",
 
     // About Preview
-    "about.title": "Quiénes somos",
-    "about.intro": "Somos un equipo multidisciplinario comprometido con la salud integral de la mujer. En La Femme combinamos calidez, profesionalismo y evidencia para acompañarte en cada etapa.",
+    "about.title": "Nuestro equipo",
+    "about.intro": "Somos un equipo multidisciplinario comprometido con la salud integral de la mujer. En Clínica La Femme unimos calidez, profesionalismo y evidencia para brindar un acompañamiento cercano, respetuoso y personalizado en cada etapa.",
     "about.cta": "Agendá tu turno",
-    "about.section_title": "Quiénes somos",
-    "about.section_text": "En La Femme creemos que cada mujer merece un acompañamiento cálido, profesional y basado en evidencia. Somos una clínica integral especializada en las etapas más transformadoras de la vida: embarazo, posparto y menopausia. Nuestro equipo multidisciplinario trabaja de forma coordinada para cuidar tu cuerpo, tu mente y tu bienestar.",
+    "about.section_title": "Nuestro equipo",
+    "about.section_text": "Somos un equipo multidisciplinario comprometido con la salud integral de la mujer. En Clínica La Femme unimos calidez, profesionalismo y evidencia para brindar un acompañamiento cercano, respetuoso y personalizado en cada etapa.",
 
     // Director
-    "director.label": "Directora · Obstetra",
-    "director.name": "Obst. Cyntia Martínez",
-    "director.bio": "Con más de [COMPLETAR] años de experiencia en salud femenina, Cyntia fundó La Femme con un propósito claro: ofrecer un espacio donde cada mujer se sienta escuchada, contenida y cuidada. Su enfoque combina la evidencia científica con una mirada profundamente humana, priorizando siempre el acompañamiento personalizado.",
+    "director.label": "Directora y Fundadora · Lic. en Obstetricia",
+    "director.name": "Lic. Cyntia Martínez",
+    "director.bio": "Fundadora de Clínica La Femme y Licenciada en Obstetricia. Su práctica se enfoca en el acompañamiento integral de la mujer, con una mirada profesional, cercana y respetuosa en cada etapa de la vida.",
     "director.cta1": "Agendá con la obstetra",
     "director.cta2": "Conocé al equipo",
 
