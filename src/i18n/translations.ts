@@ -276,16 +276,16 @@ export const translations: Record<Lang, Record<string, string>> = {
     "hero.specialties": "View Specialties",
 
     // About Preview
-    "about.title": "About Us",
-    "about.intro": "We are a multidisciplinary team committed to comprehensive women's health. At La Femme we combine warmth, professionalism and evidence to support you at every stage.",
+    "about.title": "Our Team",
+    "about.intro": "We are a multidisciplinary team committed to comprehensive women's health. At Clínica La Femme we combine warmth, professionalism and evidence to provide close, respectful and personalized care at every stage.",
     "about.cta": "Book your appointment",
-    "about.section_title": "About Us",
-    "about.section_text": "At La Femme we believe every woman deserves warm, professional, evidence-based care. We are a comprehensive clinic specializing in life's most transformative stages: pregnancy, postpartum and menopause. Our multidisciplinary team works in coordination to care for your body, mind and well-being.",
+    "about.section_title": "Our Team",
+    "about.section_text": "We are a multidisciplinary team committed to comprehensive women's health. At Clínica La Femme we combine warmth, professionalism and evidence to provide close, respectful and personalized care at every stage.",
 
     // Director
-    "director.label": "Director · Obstetrician",
-    "director.name": "Obst. Cyntia Martínez",
-    "director.bio": "With over [COMPLETE] years of experience in women's health, Cyntia founded La Femme with a clear purpose: to offer a space where every woman feels heard, supported and cared for. Her approach combines scientific evidence with a deeply human perspective, always prioritizing personalized care.",
+    "director.label": "Founder & Director · Lic. in Obstetrics",
+    "director.name": "Lic. Cyntia Martínez",
+    "director.bio": "Founder of Clínica La Femme and Licensed in Obstetrics. Her practice focuses on comprehensive women's care, with a professional, close and respectful approach at every stage of life.",
     "director.cta1": "Book with the obstetrician",
     "director.cta2": "Meet the team",
 
