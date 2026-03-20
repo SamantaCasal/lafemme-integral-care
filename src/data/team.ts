@@ -1,52 +1,42 @@
 export interface TeamMember {
   name: string;
   role: string;
+  roleEn: string;
   specialty: string;
   bio: string;
+  bioEn: string;
   instagram?: string;
   photo?: string;
 }
 
 export const teamMembers: TeamMember[] = [
   {
-    name: "Obst. Cyntia Martínez",
-    role: "Directora · Obstetra",
+    name: "Lic. Cyntia Martínez",
+    role: "Directora y Fundadora · Lic. en Obstetricia",
+    roleEn: "Founder & Director · Lic. in Obstetrics",
     specialty: "Embarazo, posparto y reeducación pélvica",
-    bio: "Con más de [COMPLETAR] años de experiencia, la Obst. Cyntia Martínez fundó La Femme con la visión de ofrecer un acompañamiento integral, humano y basado en evidencia. Su enfoque personalizado abarca desde el embarazo hasta la menopausia, siempre priorizando el bienestar de cada mujer.",
+    bio: "Fundadora de Clínica La Femme y Licenciada en Obstetricia. Su práctica se enfoca en el acompañamiento integral de la mujer, con una mirada profesional, cercana y respetuosa en cada etapa de la vida.",
+    bioEn: "Founder of Clínica La Femme and Licensed in Obstetrics. Her practice focuses on comprehensive women's care, with a professional, close and respectful approach at every stage of life.",
     instagram: "https://www.instagram.com/obstetracyntiamartinez",
     photo: "cyntia",
   },
   {
-    name: "Lic. Rosa Roa",
-    role: "Nutricionista",
-    specialty: "Nutrición perinatal y preconcepción",
-    bio: "Especializada en nutrición para preconcepción, embarazo y postparto. Diseña planes alimentarios personalizados que acompañan cada etapa con un enfoque práctico y sostenible.",
-    instagram: "https://www.instagram.com/lic.rosaroa",
-    photo: "rosa",
+    name: "Lic. Karine Correa",
+    role: "Especialista en acompañamiento prenatal y lactancia",
+    roleEn: "Prenatal care & lactation specialist",
+    specialty: "Acompañamiento prenatal y lactancia",
+    bio: "Especializada en acompañamiento integral durante el embarazo, preparación para el parto y asesoría en lactancia, con un abordaje humanizado y basado en evidencia científica.",
+    bioEn: "Specialized in comprehensive support during pregnancy, birth preparation and lactation counseling, with a humanized and evidence-based approach.",
+    photo: "karine",
   },
   {
-    name: "Lic. Juana Perez",
-    role: "Psicóloga Perinatal",
-    specialty: "Psicología perinatal y vínculo",
-    bio: "Acompaña emocionalmente a mujeres y familias durante la búsqueda del embarazo, la gestación y el posparto. Trabaja con ansiedad, adaptación a la maternidad, duelo gestacional y fortalecimiento del vínculo.",
-    instagram: "https://www.instagram.com/lic.juanaperez",
-    photo: "juana",
-  },
-  {
-    name: "Lic. Vania Rodriguez",
-    role: "Instructora Física",
-    specialty: "Actividad física perinatal y postparto",
-    bio: "Guía a mujeres en el movimiento seguro durante el embarazo y la recuperación postparto. Diseña rutinas adaptadas a cada etapa, priorizando el bienestar y la funcionalidad del cuerpo.",
-    instagram: "https://www.instagram.com/lic.vaniarodriguez",
-    photo: "vania",
-  },
-  {
-    name: "Lic. Raquel Perez",
-    role: "Fisioterapeuta",
-    specialty: "Fisioterapia pélvica y postural",
-    bio: "Especializada en reeducación del suelo pélvico y rehabilitación postural. Trabaja con técnicas manuales y ejercicios específicos para la recuperación integral de cada paciente.",
-    instagram: "https://www.instagram.com/lic.raquelperez",
-    photo: "raquel",
+    name: "Lic. Magalí Jure Wolf",
+    role: "Lic. en Psicología",
+    roleEn: "Lic. in Psychology",
+    specialty: "Psicología general e integrativa",
+    bio: "Licenciada en Psicología General con 8 años de experiencia. Trabaja desde un enfoque integrativo, brindando herramientas orientadas al bienestar emocional y la mejora de la calidad de vida.",
+    bioEn: "Licensed in General Psychology with 8 years of experience. She works from an integrative approach, providing tools aimed at emotional well-being and improving quality of life.",
+    photo: "magali",
   },
 ];
 

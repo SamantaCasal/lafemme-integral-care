@@ -14,7 +14,7 @@ const DirectorSection = () => {
             <div className="aspect-[3/4] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-xl">
               <img
                 src={directorImage}
-                alt="Obst. Cyntia Martínez – Directora de La Femme"
+                alt="Lic. Cyntia Martínez – Directora y Fundadora de La Femme"
                 className="w-full h-full object-cover"
               />
             </div>

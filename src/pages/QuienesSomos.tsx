@@ -6,21 +6,17 @@ import { Instagram } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 import teamCyntia from "@/assets/director-portrait.jpg";
-import teamRosa from "@/assets/team-rosa.jpg";
-import teamJuana from "@/assets/team-juana.jpg";
-import teamVania from "@/assets/team-vania.jpg";
-import teamRaquel from "@/assets/team-raquel.jpg";
+import teamKarine from "@/assets/team-karine.jpg";
+import teamMagali from "@/assets/team-magali.jpg";
 
 const photoMap: Record<string, string> = {
   cyntia: teamCyntia,
-  rosa: teamRosa,
-  juana: teamJuana,
-  vania: teamVania,
-  raquel: teamRaquel,
+  karine: teamKarine,
+  magali: teamMagali,
 };
 
 const QuienesSomos = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <Layout>
@@ -51,8 +47,12 @@ const QuienesSomos = () => {
                 </div>
                 <div className="space-y-2 text-center md:text-left">
                   <h3 className="text-2xl font-semibold text-foreground">{member.name}</h3>
-                  <p className="text-primary font-medium text-sm">{member.role}</p>
-                  <p className="text-muted-foreground leading-relaxed">{member.bio}</p>
+                  <p className="text-primary font-medium text-sm">
+                    {lang === "en" ? member.roleEn : member.role}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {lang === "en" ? member.bioEn : member.bio}
+                  </p>
                   {member.instagram && (
                     <a
                       href={member.instagram}
