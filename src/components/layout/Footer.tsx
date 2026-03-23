@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl font-semibold text-primary">La Femme</h3>
+            <img src={logoSrc} alt="La Femme" className="h-12 w-auto" />
             <p className="text-sm text-muted-foreground leading-relaxed">
               {t("footer.brand_desc")}
             </p>
