@@ -38,6 +38,24 @@ export const teamMembers: TeamMember[] = [
     bioEn: "Licensed in General Psychology with 8 years of experience. She works from an integrative approach, providing tools aimed at emotional well-being and improving quality of life.",
     photo: "magali",
   },
+  {
+    name: "Vannia Dubrez",
+    role: "Entrenadora especializada en embarazo y posparto · Instructora de gimnasia hipopresiva",
+    roleEn: "Pregnancy & postpartum fitness trainer · Hypopressive gymnastics instructor",
+    specialty: "Entrenamiento en embarazo y posparto",
+    bio: "Especializada en acompañar a la mujer durante el embarazo y el posparto mediante un enfoque de movimiento cuidado, profesional y adaptado a cada etapa. Su trabajo busca fortalecer el cuerpo, favorecer el bienestar y brindar seguridad en todo el proceso.",
+    bioEn: "Specialized in supporting women during pregnancy and postpartum through a careful, professional movement approach adapted to each stage. Her work aims to strengthen the body, promote well-being and provide confidence throughout the process.",
+    photo: "vania",
+  },
+  {
+    name: "Lic. Laura Cañete",
+    role: "Lic. en Nutrición · Especialista en nutrición materno-infantil",
+    roleEn: "Lic. in Nutrition · Maternal & infant nutrition specialist",
+    specialty: "Nutrición materno-infantil",
+    bio: "Licenciada en Nutrición con enfoque en salud materno-infantil. Acompaña a la mujer con planes nutricionales personalizados durante la preconcepción, el embarazo y el posparto, promoviendo hábitos saludables y un bienestar integral.",
+    bioEn: "Licensed in Nutrition with a focus on maternal and infant health. She supports women with personalized nutritional plans during preconception, pregnancy and postpartum, promoting healthy habits and comprehensive well-being.",
+    photo: "laura",
+  },
 ];
 
 export const WHATSAPP_NUMBER = "595981228045";

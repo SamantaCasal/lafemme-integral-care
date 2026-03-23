@@ -8,11 +8,15 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import teamCyntia from "@/assets/director-portrait.jpg";
 import teamKarine from "@/assets/team-karine.jpg";
 import teamMagali from "@/assets/team-magali.jpg";
+import teamVania from "@/assets/team-vania.jpg";
+import teamLaura from "@/assets/team-laura.jpg";
 
 const photoMap: Record<string, string> = {
   cyntia: teamCyntia,
   karine: teamKarine,
   magali: teamMagali,
+  vania: teamVania,
+  laura: teamLaura,
 };
 
 const QuienesSomos = () => {
