@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import logoSrc from "@/assets/logo-lafemme.svg";
 
 const navLinks = [
   { labelKey: "nav.home", href: "/" },
@@ -23,9 +24,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-2">
-          <span className="font-serif text-2xl md:text-3xl font-semibold text-primary tracking-wide">
-            La Femme
-          </span>
+          <img src={logoSrc} alt="La Femme — Clínica Integral de la Mujer" className="h-10 md:h-12 w-auto" />
         </Link>
 
         {/* Desktop nav */}
