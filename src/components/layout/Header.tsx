@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import logoSrc from "@/assets/logo-lafemme.svg";
 
 const navLinks = [
   { labelKey: "nav.home", href: "/" },
