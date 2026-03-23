@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Instagram, Phone, MapPin, Clock } from "lucide-react";
 import { WHATSAPP_DISPLAY, INSTAGRAM_HANDLE, INSTAGRAM_URL, CLINIC_ADDRESS, CLINIC_HOURS } from "@/data/team";
 import { useLanguage } from "@/i18n/LanguageContext";
+import logoSrc from "@/assets/logo-lafemme.svg";
 
 const Footer = () => {
   const { t } = useLanguage();
