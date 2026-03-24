@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Instagram, Phone, MapPin, Clock } from "lucide-react";
 import { WHATSAPP_DISPLAY, INSTAGRAM_HANDLE, INSTAGRAM_URL, CLINIC_ADDRESS, CLINIC_HOURS } from "@/data/team";
 import { useLanguage } from "@/i18n/LanguageContext";
-import logoSrc from "@/assets/logo-lafemme.svg";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -12,7 +11,7 @@ const Footer = () => {
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <img src={logoSrc} alt="La Femme" className="h-12 w-auto" />
+            <h3 className="font-serif text-2xl font-semibold text-primary">La Femme</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               {t("footer.brand_desc")}
             </p>
