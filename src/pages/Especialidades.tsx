@@ -1,23 +1,39 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import { services, serviceCategories } from "@/data/services";
+import {
+  bookableServices,
+  serviceCategoryOptions,
+} from "@/data/whatsapp-booking";
 import {
   ClipboardCheck, Heart, GraduationCap, Baby, Activity,
-  Dumbbell, Sparkles, Apple, Brain,
+  Dumbbell, Sparkles, Apple, Brain, CalendarPlus,
 } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { Button } from "@/components/ui/button";
 
 const iconMap: Record<string, React.ElementType> = {
   ClipboardCheck, Heart, GraduationCap, Baby, Activity,
   Dumbbell, Sparkles, Apple, Brain,
 };
 
+const catTranslations: Record<string, Record<string, string>> = {
+  todas: { es: "Todas", en: "All" },
+  embarazo: { es: "Embarazo", en: "Pregnancy" },
+  posparto: { es: "Posparto", en: "Postpartum" },
+  menopausia: { es: "Menopausia", en: "Menopause" },
+  bienestar: { es: "Bienestar", en: "Wellness" },
+};
+
 const Especialidades = () => {
   const [filter, setFilter] = useState("todas");
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const navigate = useNavigate();
 
-  const filtered = filter === "todas" ? services : services.filter((s) => s.category === filter);
+  const filtered =
+    filter === "todas"
+      ? bookableServices
+      : bookableServices.filter((s) => s.category === filter);
 
   return (
     <Layout>
@@ -31,7 +47,7 @@ const Especialidades = () => {
           </p>
 
           <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {serviceCategories.map((cat) => (
+            {serviceCategoryOptions.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setFilter(cat.value)}
@@ -41,7 +57,7 @@ const Especialidades = () => {
                     : "bg-accent text-accent-foreground hover:bg-primary/10"
                 }`}
               >
-                {t(`cat.${cat.value}`)}
+                {catTranslations[cat.value]?.[lang] || cat.label}
               </button>
             ))}
           </div>
@@ -50,23 +66,42 @@ const Especialidades = () => {
             {filtered.map((service) => {
               const Icon = iconMap[service.icon] || Heart;
               return (
-                <Link
-                  key={service.slug}
-                  to={`/especialidades/${service.slug}`}
-                  className="group p-6 bg-card rounded-xl border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 space-y-3"
+                <div
+                  key={service.id}
+                  className="group p-6 bg-card rounded-xl border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 space-y-3 flex flex-col"
                 >
                   <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
-                    <Icon size={22} className="text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                    <Icon
+                      size={22}
+                      className="text-primary group-hover:text-primary-foreground transition-colors duration-300"
+                    />
                   </div>
-                  <span className="inline-block text-xs font-medium text-primary bg-accent/60 px-2 py-0.5 rounded-full capitalize">
-                    {t(`cat.${service.category}`)}
+                  <span className="inline-block text-xs font-medium text-primary bg-accent/60 px-2 py-0.5 rounded-full capitalize w-fit">
+                    {catTranslations[service.category]?.[lang] || service.category}
                   </span>
                   <h3 className="font-serif text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {service.title}
+                    {service.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{service.shortDescription}</p>
-                  <span className="text-sm text-primary font-medium">{t("specialties.view_more")}</span>
-                </Link>
+                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                    {service.shortDescription}
+                  </p>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    <Link
+                      to={`/especialidades/${service.id}`}
+                      className="text-sm text-primary font-medium hover:underline underline-offset-4"
+                    >
+                      {t("specialties.view_more")}
+                    </Link>
+                    <Button
+                      size="sm"
+                      className="gap-1.5 ml-auto"
+                      onClick={() => navigate(`/turnos?servicio=${service.id}`)}
+                    >
+                      <CalendarPlus size={14} />
+                      Pedir turno
+                    </Button>
+                  </div>
+                </div>
               );
             })}
           </div>
