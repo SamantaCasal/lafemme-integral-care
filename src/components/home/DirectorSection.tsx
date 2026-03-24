@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import directorImage from "@/assets/director-portrait.jpg";
+import directorImage from "@/assets/director-home.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const DirectorSection = () => {
