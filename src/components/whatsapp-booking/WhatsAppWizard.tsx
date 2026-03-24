@@ -10,20 +10,17 @@ import StepBabyNursery from "./StepBabyNursery";
 import StepSummary from "./StepSummary";
 import {
   bookableServices,
-  professionals,
   getProfessionalById,
   dayLabels,
   buildWhatsAppUrl,
-  type BookableService,
-  type AvailabilitySlot,
 } from "@/data/whatsapp-booking";
 
 export interface WizardData {
   name: string;
   email: string;
   serviceId: string | null;
-  professionalId: string | null; // null = auto/skip, "sin-preferencia" = user chose no pref
-  selectedSlots: string[]; // "day-shift" keys
+  professionalId: string | null;
+  selectedSlots: string[];
   withBaby: "si" | "no" | null;
   nursery: "si" | "no" | "no-aplica" | null;
 }
@@ -32,10 +29,9 @@ interface Props {
   preselectedServiceId?: string;
 }
 
-const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
-  const [step, setStep] = useState(preselectedServiceId ? 0 : 1);
-  // step 0 = personal data, 1 = service, 2 = professional, 3 = schedule, 4 = baby, 5 = summary
+type StepKey = "personal" | "service" | "professional" | "schedule" | "baby" | "summary";
 
+const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
   const [data, setData] = useState<WizardData>({
     name: "",
     email: "",
@@ -55,95 +51,49 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
     [data.serviceId]
   );
 
-  // Determine if professional step should be shown
-  const showProfessionalStep = selectedService
-    ? selectedService.professionalIds.length > 1
-    : false;
+  const showProfessionalStep =
+    selectedService !== null && selectedService.professionalIds.length > 1;
 
-  // Build ordered steps
-  const steps = useMemo(() => {
-    const s = [
-      { key: "personal", label: "Datos" },
-      { key: "service", label: "Servicio" },
-    ];
-    if (showProfessionalStep) {
-      s.push({ key: "professional", label: "Profesional" });
-    }
-    s.push({ key: "schedule", label: "Horarios" });
-    s.push({ key: "baby", label: "Info extra" });
-    s.push({ key: "summary", label: "Resumen" });
-    return s;
-  }, [showProfessionalStep]);
+  // Build the ordered step keys
+  const stepKeys = useMemo((): StepKey[] => {
+    const keys: StepKey[] = ["personal"];
+    if (!preselectedServiceId) keys.push("service");
+    if (showProfessionalStep) keys.push("professional");
+    keys.push("schedule", "baby", "summary");
+    return keys;
+  }, [preselectedServiceId, showProfessionalStep]);
 
-  // Map current step index
-  const currentStepIndex = useMemo(() => {
-    // step 0 = personal data (preselected service)
-    if (step === 0) return 0;
-    return step - 1 + (preselectedServiceId ? 1 : 0);
-  }, [step, preselectedServiceId]);
+  const stepLabels: Record<StepKey, string> = {
+    personal: "Datos",
+    service: "Servicio",
+    professional: "Profesional",
+    schedule: "Horarios",
+    baby: "Info extra",
+    summary: "Resumen",
+  };
 
-  // Determine effective professional
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const activeKey = stepKeys[currentIdx] || "personal";
+
+  // Effective professional
   const effectiveProfessionalId = useMemo(() => {
     if (!selectedService) return null;
     if (selectedService.professionalIds.length === 0) return null;
-    if (selectedService.professionalIds.length === 1) return selectedService.professionalIds[0];
+    if (selectedService.professionalIds.length === 1)
+      return selectedService.professionalIds[0];
     return data.professionalId;
   }, [selectedService, data.professionalId]);
 
-  // Navigation
-  const stepKeys = steps.map((s) => s.key);
-  const currentKey = stepKeys[currentStepIndex] || "personal";
+  const progressPercent = Math.round(((currentIdx + 1) / stepKeys.length) * 100);
 
-  const goNext = () => {
-    const nextIdx = currentStepIndex + 1;
-    if (nextIdx < steps.length) {
-      // When moving from service step and single/no professional, skip professional
-      setStep(step + 1);
-    }
-  };
-
-  const goBack = () => {
-    if (step > (preselectedServiceId ? 0 : 1)) {
-      setStep(step - 1);
-    }
-  };
-
-  const goToStep = (targetKey: string) => {
-    const targetIdx = stepKeys.indexOf(targetKey);
-    if (targetIdx >= 0) {
-      setStep(targetIdx - (preselectedServiceId ? -1 : 1) + 1);
-    }
-  };
-
-  // Actual step mapping
-  const getStepKey = (): string => {
-    if (preselectedServiceId) {
-      // Steps: 0=personal, 1=professional?(skip if not), 2=schedule, 3=baby, 4=summary
-      const mapping = ["personal"];
-      if (showProfessionalStep) mapping.push("professional");
-      mapping.push("schedule", "baby", "summary");
-      return mapping[step] || "personal";
-    } else {
-      // Steps: 1=personal, 2=service, 3=professional?(skip), 4=schedule, 5=baby, 6=summary
-      const mapping = ["", "personal", "service"];
-      if (showProfessionalStep) mapping.push("professional");
-      mapping.push("schedule", "baby", "summary");
-      return mapping[step] || "personal";
-    }
-  };
-
-  const activeKey = getStepKey();
-
-  // Progress
-  const totalSteps = steps.length;
-  const activeIdx = stepKeys.indexOf(activeKey);
-  const progressPercent = Math.round(((activeIdx + 1) / totalSteps) * 100);
-
-  // Validations
+  // Validation
   const canProceed = (): boolean => {
     switch (activeKey) {
       case "personal":
-        return data.name.trim().length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+        return (
+          data.name.trim().length > 0 &&
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)
+        );
       case "service":
         return !!data.serviceId;
       case "professional":
@@ -151,13 +101,27 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
       case "schedule":
         return data.selectedSlots.length > 0;
       case "baby":
-        return data.withBaby !== null && (data.withBaby === "no" || data.nursery !== null);
+        return (
+          data.withBaby !== null &&
+          (data.withBaby === "no" || data.nursery !== null)
+        );
       default:
         return true;
     }
   };
 
-  // WhatsApp link
+  const goNext = () => {
+    if (currentIdx < stepKeys.length - 1) setCurrentIdx(currentIdx + 1);
+  };
+  const goBack = () => {
+    if (currentIdx > 0) setCurrentIdx(currentIdx - 1);
+  };
+  const goToKey = (key: StepKey) => {
+    const idx = stepKeys.indexOf(key);
+    if (idx >= 0) setCurrentIdx(idx);
+  };
+
+  // WhatsApp
   const handleSend = () => {
     const profName =
       effectiveProfessionalId && effectiveProfessionalId !== "sin-preferencia"
@@ -179,11 +143,7 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
       slots: slotLabels,
       withBaby: data.withBaby === "si" ? "Sí" : "No",
       nursery:
-        data.nursery === "si"
-          ? "Sí"
-          : data.nursery === "no"
-          ? "No"
-          : "No aplica",
+        data.nursery === "si" ? "Sí" : data.nursery === "no" ? "No" : "No aplica",
     });
 
     window.open(url, "_blank", "noopener,noreferrer");
@@ -194,14 +154,14 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
       {/* Progress */}
       <div className="mb-6">
         <div className="flex justify-between text-xs text-muted-foreground mb-2">
-          {steps.map((s, i) => (
+          {stepKeys.map((key, i) => (
             <span
-              key={s.key}
+              key={key}
               className={`font-medium transition-colors ${
-                i <= activeIdx ? "text-primary" : ""
+                i <= currentIdx ? "text-primary" : ""
               }`}
             >
-              {s.label}
+              {stepLabels[key]}
             </span>
           ))}
         </div>
@@ -237,14 +197,14 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
             data={data}
             service={selectedService}
             professionalId={effectiveProfessionalId}
-            onEdit={(key) => goToStep(key)}
+            onEdit={(key) => goToKey(key as StepKey)}
           />
         )}
       </div>
 
       {/* Navigation */}
       <div className="flex justify-between items-center mt-8 gap-3">
-        {step > (preselectedServiceId ? 0 : 1) ? (
+        {currentIdx > 0 ? (
           <Button variant="outline" onClick={goBack} className="gap-2">
             <ArrowLeft size={16} /> Volver
           </Button>
@@ -262,11 +222,7 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
             <MessageCircle size={20} /> Enviar por WhatsApp
           </Button>
         ) : (
-          <Button
-            onClick={goNext}
-            disabled={!canProceed()}
-            className="gap-2"
-          >
+          <Button onClick={goNext} disabled={!canProceed()} className="gap-2">
             Siguiente <ArrowRight size={16} />
           </Button>
         )}
