@@ -4,12 +4,10 @@ import Layout from "@/components/layout/Layout";
 import { blogPosts, blogCategories } from "@/data/blog";
 import { CalendarDays, Clock, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useLanguage } from "@/i18n/LanguageContext";
 
 const Blog = () => {
   const [category, setCategory] = useState("Todas");
   const [search, setSearch] = useState("");
-  const { t, lang } = useLanguage();
 
   const filtered = blogPosts.filter((post) => {
     const matchCat = category === "Todas" || post.category === category;
@@ -22,9 +20,9 @@ const Blog = () => {
     <Layout>
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">{t("blog.title")}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">Blog</h1>
           <p className="text-muted-foreground text-center mb-10 max-w-xl mx-auto">
-            {t("blog.info_subtitle")}
+            Información y recursos sobre embarazo, posparto, menopausia y bienestar.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-10">
@@ -44,7 +42,7 @@ const Blog = () => {
             <div className="relative w-full sm:w-64">
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder={t("blog.search_placeholder")}
+                placeholder="Buscar artículo..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="pl-9"
@@ -69,7 +67,7 @@ const Blog = () => {
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">{post.excerpt}</p>
                   <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2">
-                    <span className="flex items-center gap-1"><CalendarDays size={12} />{new Date(post.date).toLocaleDateString(lang === "es" ? "es-ES" : "en-US")}</span>
+                    <span className="flex items-center gap-1"><CalendarDays size={12} />{new Date(post.date).toLocaleDateString("es-ES")}</span>
                     <span className="flex items-center gap-1"><Clock size={12} />{post.readTime}</span>
                   </div>
                 </div>
@@ -78,7 +76,7 @@ const Blog = () => {
           </div>
 
           {filtered.length === 0 && (
-            <p className="text-center text-muted-foreground py-12">{t("blog.no_results")}</p>
+            <p className="text-center text-muted-foreground py-12">No se encontraron artículos.</p>
           )}
         </div>
       </section>

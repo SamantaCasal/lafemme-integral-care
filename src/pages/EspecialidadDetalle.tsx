@@ -3,11 +3,16 @@ import Layout from "@/components/layout/Layout";
 import { bookableServices } from "@/data/whatsapp-booking";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CalendarPlus } from "lucide-react";
-import { useLanguage } from "@/i18n/LanguageContext";
+
+const catLabels: Record<string, string> = {
+  embarazo: "Embarazo",
+  posparto: "Posparto",
+  menopausia: "Menopausia",
+  bienestar: "Bienestar",
+};
 
 const EspecialidadDetalle = () => {
   const { slug } = useParams();
-  const { t } = useLanguage();
   const navigate = useNavigate();
   const service = bookableServices.find((s) => s.id === slug);
 
@@ -15,21 +20,14 @@ const EspecialidadDetalle = () => {
     return (
       <Layout>
         <div className="container py-24 text-center">
-          <h1 className="text-2xl font-semibold text-foreground mb-4">{t("specialties.not_found")}</h1>
+          <h1 className="text-2xl font-semibold text-foreground mb-4">Especialidad no encontrada</h1>
           <Button asChild variant="outline">
-            <Link to="/especialidades">← {t("specialties.back")}</Link>
+            <Link to="/especialidades">← Volver a especialidades</Link>
           </Button>
         </div>
       </Layout>
     );
   }
-
-  const catLabels: Record<string, string> = {
-    embarazo: "Embarazo",
-    posparto: "Posparto",
-    menopausia: "Menopausia",
-    bienestar: "Bienestar",
-  };
 
   return (
     <Layout>
@@ -39,7 +37,7 @@ const EspecialidadDetalle = () => {
             to="/especialidades"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8 transition-colors"
           >
-            <ArrowLeft size={16} /> {t("specialties.back")}
+            <ArrowLeft size={16} /> Volver a especialidades
           </Link>
 
           <span className="inline-block text-xs font-medium text-primary bg-accent px-3 py-1 rounded-full capitalize mb-4">
@@ -61,7 +59,7 @@ const EspecialidadDetalle = () => {
               <CalendarPlus size={18} /> Pedir turno
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link to="/contacto">{t("specialties.consult")}</Link>
+              <Link to="/contacto">Consultanos</Link>
             </Button>
           </div>
         </div>

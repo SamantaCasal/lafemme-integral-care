@@ -1,7 +1,6 @@
-import { useLanguage } from "@/i18n/LanguageContext";
 import { BookingFormData } from "@/types/booking";
 import { format } from "date-fns";
-import { es, enUS } from "date-fns/locale";
+import { es } from "date-fns/locale";
 import { Calendar, Clock, User, FileText, Receipt } from "lucide-react";
 
 interface Props {
@@ -13,29 +12,21 @@ const formatPrice = (guaranies: number) =>
   `Gs. ${guaranies.toLocaleString("es-PY")}`;
 
 const BookingSummary = ({ form, compact }: Props) => {
-  const { t, lang } = useLanguage();
-  const locale = lang === "es" ? es : enUS;
-
-  const serviceName = form.service
-    ? lang === "es"
-      ? form.service.name_es
-      : form.service.name_en
-    : null;
+  const serviceName = form.service ? form.service.name_es : null;
 
   return (
     <div className={`rounded-xl border border-border bg-card p-5 ${compact ? "" : "shadow-sm"}`}>
       <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-        {t("booking.summary_title")}
+        Resumen de tu reserva
       </h3>
 
       <div className="space-y-3 text-sm">
-        {/* Service */}
         <div className="flex items-start gap-2">
           <FileText size={16} className="text-primary mt-0.5 shrink-0" />
           <div>
-            <p className="text-muted-foreground text-xs">{t("booking.summary_service")}</p>
+            <p className="text-muted-foreground text-xs">Servicio</p>
             <p className="font-medium text-foreground">
-              {serviceName || <span className="text-muted-foreground italic">{t("booking.not_selected")}</span>}
+              {serviceName || <span className="text-muted-foreground italic">No seleccionado</span>}
             </p>
             {form.service && (
               <p className="text-primary font-semibold mt-0.5">
@@ -45,73 +36,60 @@ const BookingSummary = ({ form, compact }: Props) => {
           </div>
         </div>
 
-        {/* Professional */}
         <div className="flex items-start gap-2">
           <User size={16} className="text-primary mt-0.5 shrink-0" />
           <div>
-            <p className="text-muted-foreground text-xs">{t("booking.summary_professional")}</p>
+            <p className="text-muted-foreground text-xs">Profesional</p>
             <p className="font-medium text-foreground">
-              {form.professional?.name || (
-                <span className="text-muted-foreground italic">{t("booking.not_selected")}</span>
-              )}
+              {form.professional?.name || <span className="text-muted-foreground italic">No seleccionado</span>}
             </p>
           </div>
         </div>
 
-        {/* Date */}
         <div className="flex items-start gap-2">
           <Calendar size={16} className="text-primary mt-0.5 shrink-0" />
           <div>
-            <p className="text-muted-foreground text-xs">{t("booking.summary_date")}</p>
+            <p className="text-muted-foreground text-xs">Fecha</p>
             <p className="font-medium text-foreground">
               {form.date ? (
-                format(form.date, "EEEE d 'de' MMMM, yyyy", { locale })
+                format(form.date, "EEEE d 'de' MMMM, yyyy", { locale: es })
               ) : (
-                <span className="text-muted-foreground italic">{t("booking.not_selected")}</span>
+                <span className="text-muted-foreground italic">No seleccionado</span>
               )}
             </p>
           </div>
         </div>
 
-        {/* Time */}
         <div className="flex items-start gap-2">
           <Clock size={16} className="text-primary mt-0.5 shrink-0" />
           <div>
-            <p className="text-muted-foreground text-xs">{t("booking.summary_time")}</p>
+            <p className="text-muted-foreground text-xs">Hora</p>
             <p className="font-medium text-foreground">
-              {form.time || (
-                <span className="text-muted-foreground italic">{t("booking.not_selected")}</span>
-              )}
+              {form.time || <span className="text-muted-foreground italic">No seleccionado</span>}
             </p>
             {form.service && (
               <p className="text-muted-foreground text-xs">
-                {form.service.duration_minutes} min · {t("booking.presencial")}
+                {form.service.duration_minutes} min · Presencial
               </p>
             )}
           </div>
         </div>
 
-        {/* Invoice */}
         {form.needsInvoice && (
           <div className="flex items-start gap-2">
             <Receipt size={16} className="text-primary mt-0.5 shrink-0" />
             <div>
-              <p className="text-muted-foreground text-xs">{t("booking.summary_invoice")}</p>
-              <p className="font-medium text-foreground">
-                RUC: {form.invoiceRuc || "—"}
-              </p>
+              <p className="text-muted-foreground text-xs">Factura</p>
+              <p className="font-medium text-foreground">RUC: {form.invoiceRuc || "—"}</p>
             </div>
           </div>
         )}
       </div>
 
-      {/* Total */}
       {form.service && (
         <div className="mt-4 pt-3 border-t border-border flex items-center justify-between">
           <span className="text-sm font-medium text-muted-foreground">Total</span>
-          <span className="text-lg font-bold text-primary">
-            {formatPrice(form.service.price_guaranies)}
-          </span>
+          <span className="text-lg font-bold text-primary">{formatPrice(form.service.price_guaranies)}</span>
         </div>
       )}
     </div>

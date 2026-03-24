@@ -9,7 +9,6 @@ import {
   ClipboardCheck, Heart, GraduationCap, Baby, Activity,
   Dumbbell, Sparkles, Apple, Brain, CalendarPlus,
 } from "lucide-react";
-import { useLanguage } from "@/i18n/LanguageContext";
 import { Button } from "@/components/ui/button";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -17,17 +16,16 @@ const iconMap: Record<string, React.ElementType> = {
   Dumbbell, Sparkles, Apple, Brain,
 };
 
-const catTranslations: Record<string, Record<string, string>> = {
-  todas: { es: "Todas", en: "All" },
-  embarazo: { es: "Embarazo", en: "Pregnancy" },
-  posparto: { es: "Posparto", en: "Postpartum" },
-  menopausia: { es: "Menopausia", en: "Menopause" },
-  bienestar: { es: "Bienestar", en: "Wellness" },
+const catLabels: Record<string, string> = {
+  todas: "Todas",
+  embarazo: "Embarazo",
+  posparto: "Posparto",
+  menopausia: "Menopausia",
+  bienestar: "Bienestar",
 };
 
 const Especialidades = () => {
   const [filter, setFilter] = useState("todas");
-  const { t, lang } = useLanguage();
   const navigate = useNavigate();
 
   const filtered =
@@ -40,10 +38,10 @@ const Especialidades = () => {
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">
-            {t("specialties.page_title")}
+            Nuestras Especialidades
           </h1>
           <p className="text-muted-foreground text-center mb-10 max-w-xl mx-auto">
-            {t("specialties.page_subtitle")}
+            Servicios diseñados para acompañarte en cada etapa con un enfoque integral y personalizado.
           </p>
 
           <div className="flex flex-wrap justify-center gap-2 mb-12">
@@ -57,7 +55,7 @@ const Especialidades = () => {
                     : "bg-accent text-accent-foreground hover:bg-primary/10"
                 }`}
               >
-                {catTranslations[cat.value]?.[lang] || cat.label}
+                {catLabels[cat.value] || cat.label}
               </button>
             ))}
           </div>
@@ -71,13 +69,10 @@ const Especialidades = () => {
                   className="group p-6 bg-card rounded-xl border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 space-y-3 flex flex-col"
                 >
                   <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
-                    <Icon
-                      size={22}
-                      className="text-primary group-hover:text-primary-foreground transition-colors duration-300"
-                    />
+                    <Icon size={22} className="text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                   </div>
                   <span className="inline-block text-xs font-medium text-primary bg-accent/60 px-2 py-0.5 rounded-full capitalize w-fit">
-                    {catTranslations[service.category]?.[lang] || service.category}
+                    {catLabels[service.category] || service.category}
                   </span>
                   <h3 className="font-serif text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                     {service.name}
@@ -90,7 +85,7 @@ const Especialidades = () => {
                       to={`/especialidades/${service.id}`}
                       className="text-sm text-primary font-medium hover:underline underline-offset-4"
                     >
-                      {t("specialties.view_more")}
+                      Ver más →
                     </Link>
                     <Button
                       size="sm"

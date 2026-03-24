@@ -2,22 +2,20 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useLanguage } from "@/i18n/LanguageContext";
 
 const navLinks = [
-  { labelKey: "nav.home", href: "/" },
-  { labelKey: "nav.about", href: "/quienes-somos" },
-  { labelKey: "nav.specialties", href: "/especialidades" },
-  { labelKey: "nav.blog", href: "/blog" },
-  { labelKey: "nav.testimonials", href: "/testimonios" },
-  { labelKey: "nav.faq", href: "/faq" },
-  { labelKey: "nav.contact", href: "/contacto" },
+  { label: "Inicio", href: "/" },
+  { label: "Nuestro equipo", href: "/quienes-somos" },
+  { label: "Especialidades", href: "/especialidades" },
+  { label: "Blog", href: "/blog" },
+  { label: "Testimonios", href: "/testimonios" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contacto", href: "/contacto" },
 ];
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const { lang, setLang, t } = useLanguage();
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
@@ -40,32 +38,19 @@ const Header = () => {
                   : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
               }`}
             >
-              {t(link.labelKey)}
+              {link.label}
             </Link>
           ))}
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          {/* Language switch */}
-          <button
-            onClick={() => setLang(lang === "es" ? "en" : "es")}
-            className="px-3 py-1.5 text-xs font-semibold rounded-full border border-border bg-card text-foreground hover:bg-accent transition-colors"
-          >
-            {lang === "es" ? "EN" : "ES"}
-          </button>
           <Button asChild size="default">
-            <Link to="/turnos">{t("nav.book")}</Link>
+            <Link to="/turnos">Agendar turno</Link>
           </Button>
         </div>
 
         {/* Mobile toggle */}
         <div className="flex lg:hidden items-center gap-2">
-          <button
-            onClick={() => setLang(lang === "es" ? "en" : "es")}
-            className="px-2.5 py-1 text-xs font-semibold rounded-full border border-border bg-card text-foreground"
-          >
-            {lang === "es" ? "EN" : "ES"}
-          </button>
           <button
             className="p-2 text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -91,12 +76,12 @@ const Header = () => {
                     : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                 }`}
               >
-                {t(link.labelKey)}
+                {link.label}
               </Link>
             ))}
             <div className="pt-3 px-4">
               <Button asChild className="w-full">
-                <Link to="/turnos" onClick={() => setMobileOpen(false)}>{t("nav.book")}</Link>
+                <Link to="/turnos" onClick={() => setMobileOpen(false)}>Agendar turno</Link>
               </Button>
             </div>
           </nav>

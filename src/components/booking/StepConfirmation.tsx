@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useLanguage } from "@/i18n/LanguageContext";
 import { BookingFormData, BookingResult } from "@/types/booking";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
-import { es, enUS } from "date-fns/locale";
+import { es } from "date-fns/locale";
 import { Pencil, Loader2 } from "lucide-react";
 
 interface Props {
@@ -17,14 +16,10 @@ interface Props {
 const formatPrice = (g: number) => `Gs. ${g.toLocaleString("es-PY")}`;
 
 const StepConfirmation = ({ form, onBack, onEdit, onConfirmed }: Props) => {
-  const { t, lang } = useLanguage();
-  const locale = lang === "es" ? es : enUS;
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const serviceName = form.service
-    ? lang === "es" ? form.service.name_es : form.service.name_en
-    : "";
+  const serviceName = form.service ? form.service.name_es : "";
 
   const handleConfirm = async () => {
     if (!form.service || !form.professional || !form.date || !form.time) return;
@@ -35,7 +30,7 @@ const StepConfirmation = ({ form, onBack, onEdit, onConfirmed }: Props) => {
       const { data, error: dbError } = await supabase
         .from("bookings")
         .insert({
-          booking_number: "", // trigger will generate
+          booking_number: "",
           service_id: form.service.id,
           professional_id: form.professional.id,
           booking_date: format(form.date, "yyyy-MM-dd"),
@@ -57,21 +52,13 @@ const StepConfirmation = ({ form, onBack, onEdit, onConfirmed }: Props) => {
       onConfirmed(data as unknown as BookingResult);
     } catch (err: any) {
       console.error("Booking error:", err);
-      setError(t("booking.error_generic"));
+      setError("Ocurrió un error al procesar tu reserva. Por favor intentá de nuevo.");
     } finally {
       setSubmitting(false);
     }
   };
 
-  const Row = ({
-    label,
-    value,
-    step,
-  }: {
-    label: string;
-    value: string;
-    step: number;
-  }) => (
+  const Row = ({ label, value, step }: { label: string; value: string; step: number }) => (
     <div className="flex items-start justify-between py-2.5 border-b border-border/50 last:border-0">
       <div>
         <p className="text-xs text-muted-foreground">{label}</p>
@@ -85,44 +72,33 @@ const StepConfirmation = ({ form, onBack, onEdit, onConfirmed }: Props) => {
 
   return (
     <div>
-      <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-2">
-        {t("booking.step5_title")}
-      </h2>
-      <p className="text-muted-foreground mb-6">{t("booking.step5_desc")}</p>
+      <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-2">Revisá y confirmá</h2>
+      <p className="text-muted-foreground mb-6">Verificá los datos antes de confirmar tu reserva.</p>
 
       <div className="max-w-lg rounded-xl border border-border bg-card p-5">
-        <Row label={t("booking.summary_service")} value={`${serviceName} — ${formatPrice(form.service!.price_guaranies)}`} step={1} />
-        <Row label={t("booking.summary_professional")} value={form.professional!.name} step={2} />
-        <Row
-          label={t("booking.summary_date")}
-          value={`${format(form.date!, "EEEE d 'de' MMMM, yyyy", { locale })} — ${form.time}`}
-          step={3}
-        />
-        <Row label={t("booking.duration")} value={`${form.service!.duration_minutes} min · Presencial`} step={1} />
-        <Row label={t("booking.patient_email")} value={form.patientEmail} step={4} />
-        <Row label={t("booking.patient_phone")} value={form.patientPhone} step={4} />
+        <Row label="Servicio" value={`${serviceName} — ${formatPrice(form.service!.price_guaranies)}`} step={1} />
+        <Row label="Profesional" value={form.professional!.name} step={2} />
+        <Row label="Fecha" value={`${format(form.date!, "EEEE d 'de' MMMM, yyyy", { locale: es })} — ${form.time}`} step={3} />
+        <Row label="Duración" value={`${form.service!.duration_minutes} min · Presencial`} step={1} />
+        <Row label="Email" value={form.patientEmail} step={4} />
+        <Row label="Celular" value={form.patientPhone} step={4} />
         {form.needsInvoice && (
-          <Row label={t("booking.summary_invoice")} value={`RUC: ${form.invoiceRuc} — ${form.invoiceName}`} step={4} />
+          <Row label="Factura" value={`RUC: ${form.invoiceRuc} — ${form.invoiceName}`} step={4} />
         )}
 
-        {/* Total */}
         <div className="flex items-center justify-between pt-3 mt-2 border-t border-border">
           <span className="font-medium text-foreground">Total</span>
           <span className="text-xl font-bold text-primary">{formatPrice(form.service!.price_guaranies)}</span>
         </div>
       </div>
 
-      {error && (
-        <p className="text-destructive text-sm mt-4">{error}</p>
-      )}
+      {error && <p className="text-destructive text-sm mt-4">{error}</p>}
 
       <div className="flex justify-between mt-6">
-        <Button variant="outline" onClick={onBack} size="lg">
-          {t("booking.back")}
-        </Button>
+        <Button variant="outline" onClick={onBack} size="lg">Volver</Button>
         <Button onClick={handleConfirm} disabled={submitting} size="lg">
           {submitting && <Loader2 size={18} className="animate-spin" />}
-          {t("booking.confirm_booking")}
+          Confirmar reserva
         </Button>
       </div>
     </div>
