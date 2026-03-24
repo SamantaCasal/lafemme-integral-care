@@ -1,14 +1,15 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import { services } from "@/data/services";
+import { bookableServices } from "@/data/whatsapp-booking";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CalendarPlus } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const EspecialidadDetalle = () => {
   const { slug } = useParams();
   const { t } = useLanguage();
-  const service = services.find((s) => s.slug === slug);
+  const navigate = useNavigate();
+  const service = bookableServices.find((s) => s.id === slug);
 
   if (!service) {
     return (
@@ -23,27 +24,41 @@ const EspecialidadDetalle = () => {
     );
   }
 
+  const catLabels: Record<string, string> = {
+    embarazo: "Embarazo",
+    posparto: "Posparto",
+    menopausia: "Menopausia",
+    bienestar: "Bienestar",
+  };
+
   return (
     <Layout>
       <section className="py-16 md:py-24 bg-background">
         <div className="container max-w-3xl">
-          <Link to="/especialidades" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8 transition-colors">
+          <Link
+            to="/especialidades"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8 transition-colors"
+          >
             <ArrowLeft size={16} /> {t("specialties.back")}
           </Link>
 
           <span className="inline-block text-xs font-medium text-primary bg-accent px-3 py-1 rounded-full capitalize mb-4">
-            {t(`cat.${service.category}`)}
+            {catLabels[service.category] || service.category}
           </span>
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            {service.title}
+            {service.name}
           </h1>
           <div className="prose prose-lg text-muted-foreground leading-relaxed">
             <p>{service.fullDescription}</p>
           </div>
 
           <div className="mt-12 flex flex-wrap gap-4">
-            <Button asChild size="lg">
-              <Link to="/turnos">{t("hero.cta")}</Link>
+            <Button
+              size="lg"
+              className="gap-2"
+              onClick={() => navigate(`/turnos?servicio=${service.id}`)}
+            >
+              <CalendarPlus size={18} /> Pedir turno
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link to="/contacto">{t("specialties.consult")}</Link>
