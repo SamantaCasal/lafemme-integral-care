@@ -3,7 +3,6 @@ import { teamMembers } from "@/data/team";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
-import { useLanguage } from "@/i18n/LanguageContext";
 
 import teamCyntia from "@/assets/director-portrait.jpg";
 import teamKarine from "@/assets/team-karine.jpg";
@@ -20,17 +19,15 @@ const photoMap: Record<string, string> = {
 };
 
 const QuienesSomos = () => {
-  const { t, lang } = useLanguage();
-
   return (
     <Layout>
       <section className="py-16 md:py-24 bg-background">
         <div className="container max-w-4xl">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-6">
-            {t("about.title")}
+            Nuestro equipo
           </h1>
           <p className="text-lg text-muted-foreground text-center leading-relaxed mb-16 max-w-2xl mx-auto">
-            {t("about.intro")}
+            Somos un equipo multidisciplinario comprometido con la salud integral de la mujer. En Clínica La Femme unimos calidez, profesionalismo y evidencia para brindar un acompañamiento cercano, respetuoso y personalizado en cada etapa.
           </p>
 
           <div className="space-y-16">
@@ -51,12 +48,8 @@ const QuienesSomos = () => {
                 </div>
                 <div className="space-y-2 text-center md:text-left">
                   <h3 className="text-2xl font-semibold text-foreground">{member.name}</h3>
-                  <p className="text-primary font-medium text-sm">
-                    {lang === "en" ? member.roleEn : member.role}
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {lang === "en" ? member.bioEn : member.bio}
-                  </p>
+                  <p className="text-primary font-medium text-sm">{member.role}</p>
+                  <p className="text-muted-foreground leading-relaxed">{member.bio}</p>
                   {member.instagram && (
                     <a
                       href={member.instagram}
@@ -75,7 +68,7 @@ const QuienesSomos = () => {
 
           <div className="text-center mt-16">
             <Button asChild size="lg">
-              <Link to="/turnos">{t("about.cta")}</Link>
+              <Link to="/turnos">Agendá tu turno</Link>
             </Button>
           </div>
         </div>

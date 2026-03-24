@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useLanguage } from "@/i18n/LanguageContext";
 import { Professional, BookingFormData } from "@/types/booking";
 import { Button } from "@/components/ui/button";
 import { Check, User } from "lucide-react";
@@ -13,7 +12,6 @@ interface Props {
 }
 
 const StepProfessionalSelect = ({ form, updateForm, onNext, onBack }: Props) => {
-  const { t, lang } = useLanguage();
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +19,6 @@ const StepProfessionalSelect = ({ form, updateForm, onNext, onBack }: Props) => 
     if (!form.service) return;
     const load = async () => {
       setLoading(true);
-      // Get professional IDs for this service
       const { data: links } = await supabase
         .from("professional_services")
         .select("professional_id")
@@ -44,7 +41,6 @@ const StepProfessionalSelect = ({ form, updateForm, onNext, onBack }: Props) => 
       const result = (profs as Professional[]) || [];
       setProfessionals(result);
 
-      // Auto-select if only one
       if (result.length === 1 && !form.professional) {
         updateForm({ professional: result[0], date: null, time: null });
       }
@@ -56,9 +52,9 @@ const StepProfessionalSelect = ({ form, updateForm, onNext, onBack }: Props) => 
   return (
     <div>
       <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-2">
-        {t("booking.step2_title")}
+        Elegí tu profesional
       </h2>
-      <p className="text-muted-foreground mb-6">{t("booking.step2_desc")}</p>
+      <p className="text-muted-foreground mb-6">Seleccioná con quién querés atenderte.</p>
 
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -67,12 +63,11 @@ const StepProfessionalSelect = ({ form, updateForm, onNext, onBack }: Props) => 
           ))}
         </div>
       ) : professionals.length === 0 ? (
-        <p className="text-muted-foreground text-center py-8">{t("booking.no_professionals")}</p>
+        <p className="text-muted-foreground text-center py-8">No hay profesionales disponibles para este servicio.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {professionals.map((prof) => {
             const selected = form.professional?.id === prof.id;
-            const role = lang === "es" ? prof.role_es : prof.role_en;
             return (
               <button
                 key={prof.id}
@@ -91,7 +86,7 @@ const StepProfessionalSelect = ({ form, updateForm, onNext, onBack }: Props) => 
                     <h3 className="font-semibold text-foreground text-sm truncate">{prof.name}</h3>
                     {selected && <Check size={18} className="text-primary shrink-0 ml-2" />}
                   </div>
-                  <p className="text-muted-foreground text-xs mt-0.5">{role}</p>
+                  <p className="text-muted-foreground text-xs mt-0.5">{prof.role_es}</p>
                 </div>
               </button>
             );
@@ -100,12 +95,8 @@ const StepProfessionalSelect = ({ form, updateForm, onNext, onBack }: Props) => 
       )}
 
       <div className="flex justify-between mt-6">
-        <Button variant="outline" onClick={onBack} size="lg">
-          {t("booking.back")}
-        </Button>
-        <Button onClick={onNext} disabled={!form.professional} size="lg">
-          {t("booking.continue")}
-        </Button>
+        <Button variant="outline" onClick={onBack} size="lg">Volver</Button>
+        <Button onClick={onNext} disabled={!form.professional} size="lg">Continuar</Button>
       </div>
     </div>
   );

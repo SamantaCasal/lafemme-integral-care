@@ -1,22 +1,16 @@
 import { Link } from "react-router-dom";
 import { blogPosts } from "@/data/blog";
 import { CalendarDays, Clock } from "lucide-react";
-import { useLanguage } from "@/i18n/LanguageContext";
 
 const BlogPreview = () => {
-  const { t, lang } = useLanguage();
   const latest = blogPosts.slice(0, 3);
 
   return (
     <section className="py-16 md:py-24 bg-card">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-            {t("blog.title")}
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            {t("blog.subtitle")}
-          </p>
+          <h2 className="text-3xl md:text-4xl font-semibold text-foreground">Blog</h2>
+          <p className="mt-3 text-muted-foreground">Artículos y recursos para tu bienestar.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -39,7 +33,7 @@ const BlogPreview = () => {
                   {post.excerpt}
                 </p>
                 <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2">
-                  <span className="flex items-center gap-1"><CalendarDays size={12} />{new Date(post.date).toLocaleDateString(lang === "es" ? "es-ES" : "en-US")}</span>
+                  <span className="flex items-center gap-1"><CalendarDays size={12} />{new Date(post.date).toLocaleDateString("es-ES")}</span>
                   <span className="flex items-center gap-1"><Clock size={12} />{post.readTime}</span>
                 </div>
               </div>
@@ -49,7 +43,7 @@ const BlogPreview = () => {
 
         <div className="text-center mt-10">
           <Link to="/blog" className="text-primary font-medium hover:underline underline-offset-4">
-            {t("blog.view_all")}
+            Ver todos los artículos →
           </Link>
         </div>
       </div>

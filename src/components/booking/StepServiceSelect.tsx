@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useLanguage } from "@/i18n/LanguageContext";
 import { BookableService, BookingFormData, BOOKING_CATEGORIES } from "@/types/booking";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,8 +13,18 @@ interface Props {
 
 const formatPrice = (g: number) => `Gs. ${g.toLocaleString("es-PY")}`;
 
+const catLabels: Record<string, string> = {
+  all: "Todos",
+  embarazo: "Embarazo",
+  posparto: "Posparto",
+  lactancia: "Lactancia",
+  reeducacion: "Reeducación",
+  "spa-terapias": "Spa / Terapias",
+  nutricion: "Nutrición",
+  psicologia: "Psicología",
+};
+
 const StepServiceSelect = ({ form, updateForm, onNext }: Props) => {
-  const { t, lang } = useLanguage();
   const [services, setServices] = useState<BookableService[]>([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState("all");
@@ -35,35 +44,26 @@ const StepServiceSelect = ({ form, updateForm, onNext }: Props) => {
   }, []);
 
   const filtered = services.filter((s) => {
-    const name = lang === "es" ? s.name_es : s.name_en;
-    const desc = lang === "es" ? s.description_es : s.description_en;
     const matchCat = category === "all" || s.category === category;
     const matchSearch =
       !search ||
-      name.toLowerCase().includes(search.toLowerCase()) ||
-      desc.toLowerCase().includes(search.toLowerCase());
+      s.name_es.toLowerCase().includes(search.toLowerCase()) ||
+      s.description_es.toLowerCase().includes(search.toLowerCase());
     return matchCat && matchSearch;
   });
 
   return (
     <div>
       <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-2">
-        {t("booking.step1_title")}
+        Elegí tu servicio
       </h2>
-      <p className="text-muted-foreground mb-6">{t("booking.step1_desc")}</p>
+      <p className="text-muted-foreground mb-6">Seleccioná la especialidad que necesitás.</p>
 
-      {/* Search */}
       <div className="relative mb-4">
         <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-        <Input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder={t("booking.search_services")}
-          className="pl-9"
-        />
+        <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar servicio..." className="pl-9" />
       </div>
 
-      {/* Category chips */}
       <div className="flex flex-wrap gap-2 mb-6">
         {BOOKING_CATEGORIES.map((cat) => (
           <button
@@ -75,12 +75,11 @@ const StepServiceSelect = ({ form, updateForm, onNext }: Props) => {
                 : "bg-muted text-muted-foreground hover:bg-accent"
             }`}
           >
-            {t(cat.labelKey)}
+            {catLabels[cat.value] || cat.labelKey}
           </button>
         ))}
       </div>
 
-      {/* Services grid */}
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[1, 2, 3, 4].map((i) => (
@@ -88,24 +87,15 @@ const StepServiceSelect = ({ form, updateForm, onNext }: Props) => {
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <p className="text-muted-foreground text-center py-8">{t("booking.no_services")}</p>
+        <p className="text-muted-foreground text-center py-8">No se encontraron servicios.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filtered.map((service) => {
-            const name = lang === "es" ? service.name_es : service.name_en;
-            const desc = lang === "es" ? service.description_es : service.description_en;
             const selected = form.service?.id === service.id;
             return (
               <button
                 key={service.id}
-                onClick={() => {
-                  updateForm({
-                    service,
-                    professional: null, // reset downstream
-                    date: null,
-                    time: null,
-                  });
-                }}
+                onClick={() => updateForm({ service, professional: null, date: null, time: null })}
                 className={`text-left p-4 rounded-xl border transition-all ${
                   selected
                     ? "border-primary bg-primary/5 ring-2 ring-primary/20"
@@ -113,10 +103,10 @@ const StepServiceSelect = ({ form, updateForm, onNext }: Props) => {
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-semibold text-foreground text-sm leading-tight">{name}</h3>
+                  <h3 className="font-semibold text-foreground text-sm leading-tight">{service.name_es}</h3>
                   {selected && <Check size={18} className="text-primary shrink-0" />}
                 </div>
-                <p className="text-muted-foreground text-xs mt-1 line-clamp-2">{desc}</p>
+                <p className="text-muted-foreground text-xs mt-1 line-clamp-2">{service.description_es}</p>
                 <div className="flex items-center justify-between mt-3">
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Clock size={12} />
@@ -124,9 +114,7 @@ const StepServiceSelect = ({ form, updateForm, onNext }: Props) => {
                     <span className="mx-1">·</span>
                     <span className="capitalize">{service.modality}</span>
                   </div>
-                  <span className="text-sm font-bold text-primary">
-                    {formatPrice(service.price_guaranies)}
-                  </span>
+                  <span className="text-sm font-bold text-primary">{formatPrice(service.price_guaranies)}</span>
                 </div>
               </button>
             );
@@ -134,11 +122,8 @@ const StepServiceSelect = ({ form, updateForm, onNext }: Props) => {
         </div>
       )}
 
-      {/* Next */}
       <div className="flex justify-end mt-6">
-        <Button onClick={onNext} disabled={!form.service} size="lg">
-          {t("booking.continue")}
-        </Button>
+        <Button onClick={onNext} disabled={!form.service} size="lg">Continuar</Button>
       </div>
     </div>
   );

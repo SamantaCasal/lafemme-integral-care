@@ -4,7 +4,6 @@ import {
   ClipboardCheck, Heart, GraduationCap, Baby, Activity,
   Dumbbell, Sparkles, Apple, Brain, CalendarPlus,
 } from "lucide-react";
-import { useLanguage } from "@/i18n/LanguageContext";
 import { Button } from "@/components/ui/button";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -13,7 +12,6 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 const FeaturedServices = () => {
-  const { t } = useLanguage();
   const navigate = useNavigate();
   const featured = bookableServices.slice(0, 6);
 
@@ -22,10 +20,10 @@ const FeaturedServices = () => {
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-            {t("services.title")}
+            Especialidades destacadas
           </h2>
           <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
-            {t("services.subtitle")}
+            Conocé nuestros servicios diseñados para cada etapa de tu vida.
           </p>
         </div>
 
@@ -39,10 +37,7 @@ const FeaturedServices = () => {
                 style={{ animationDelay: `${i * 0.08}s` }}
               >
                 <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                  <Icon
-                    size={22}
-                    className="text-primary group-hover:text-primary-foreground transition-colors duration-300"
-                  />
+                  <Icon size={22} className="text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                 </div>
                 <h3 className="font-serif text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                   {service.name}
@@ -55,7 +50,7 @@ const FeaturedServices = () => {
                     to={`/especialidades/${service.id}`}
                     className="inline-block text-sm text-primary font-medium hover:underline underline-offset-4"
                   >
-                    {t("services.more_info")}
+                    Más información →
                   </Link>
                   <Button
                     size="sm"
@@ -76,7 +71,7 @@ const FeaturedServices = () => {
             to="/especialidades"
             className="text-primary font-medium hover:underline underline-offset-4"
           >
-            {t("services.view_all")}
+            Ver todas las especialidades →
           </Link>
         </div>
       </div>

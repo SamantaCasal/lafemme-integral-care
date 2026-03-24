@@ -3,19 +3,17 @@ import { testimonials } from "@/data/testimonials";
 import { Star, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WHATSAPP_NUMBER } from "@/data/team";
-import { useLanguage } from "@/i18n/LanguageContext";
 
 const Testimonios = () => {
-  const { t } = useLanguage();
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("testimonials.share_wa"))}`;
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, quiero compartir mi experiencia en La Femme.")}`;
 
   return (
     <Layout>
       <section className="py-16 md:py-24 bg-background" id="testimonios">
         <div className="container">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">{t("testimonials.title")}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">Testimonios</h1>
           <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
-            {t("testimonials.subtitle")}
+            Lo que dicen nuestras pacientes sobre su experiencia en La Femme.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -40,12 +38,12 @@ const Testimonios = () => {
           </div>
 
           <div className="text-center mt-16 p-8 bg-card rounded-2xl border border-border">
-            <h3 className="text-2xl font-semibold text-foreground mb-3">{t("testimonials.share_title")}</h3>
-            <p className="text-muted-foreground mb-6">{t("testimonials.share_text")}</p>
+            <h3 className="text-2xl font-semibold text-foreground mb-3">¿Querés compartir tu experiencia?</h3>
+            <p className="text-muted-foreground mb-6">Nos encantaría escucharte. Tu historia puede ayudar a otras mujeres.</p>
             <Button asChild variant="whatsapp" size="lg">
               <a href={waUrl} target="_blank" rel="noopener noreferrer">
                 <MessageCircle size={18} />
-                {t("testimonials.share_cta")}
+                Contanos tu experiencia
               </a>
             </Button>
           </div>
