@@ -12,11 +12,6 @@ const Footer = () => {
             <Link to="/">
               <img src={logoImg} alt="La Femme" className="h-16 w-auto" loading="lazy" width={512} height={512} />
             </Link>
-            <div className="flex gap-3">
-              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Instagram">
-                <Instagram size={18} />
-              </a>
-            </div>
           </div>
 
           <div className="space-y-4">
