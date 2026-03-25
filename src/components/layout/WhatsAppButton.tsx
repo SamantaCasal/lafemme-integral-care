@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 import { WHATSAPP_NUMBER } from "@/data/team";
 
 const WhatsAppButton = () => {
-  const message = encodeURIComponent("Hola, me gustaría agendar un turno en La Femme.");
+  const message = encodeURIComponent("Hola, me gustaría solicitar un turno en La Femme.");
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 
   return (

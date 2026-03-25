@@ -10,7 +10,7 @@ const steps = [
 ];
 
 const AppointmentTeaser = () => {
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, quiero agendar un turno en La Femme.")}`;
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, quiero solicitar un turno en La Femme.")}`;
 
   return (
     <section className="py-16 md:py-24 bg-background">
