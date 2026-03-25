@@ -146,6 +146,7 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
       withBaby: data.withBaby === "si" ? "Sí" : "No",
       nursery:
         data.nursery === "si" ? "Sí" : data.nursery === "no" ? "No" : "No aplica",
+      comments: data.comments,
     });
 
     window.open(url, "_blank", "noopener,noreferrer");
