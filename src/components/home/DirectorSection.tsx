@@ -25,9 +25,17 @@ const DirectorSection = () => {
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
               Lic. Cyntia Martínez
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Fundadora de Clínica La Femme y Licenciada en Obstetricia. Su práctica se enfoca en el acompañamiento integral de la mujer, con una mirada profesional, cercana y respetuosa en cada etapa de la vida.
-            </p>
+            <div className="text-muted-foreground text-base md:text-lg leading-relaxed space-y-4">
+              <p>
+                <strong>Lic. Cyntia Martínez es fundadora de Clínica La Femme, obstetra y docente universitaria.</strong> Apasionada por la salud integral de la mujer, dedica su trabajo a acompañar con calidez, respeto y respaldo profesional cada etapa de su vida.
+              </p>
+              <p>
+                Su camino profesional ha estado marcado por una búsqueda constante de formación y actualización, con la convicción de que una atención de calidad debe estar siempre sostenida por el conocimiento, la ética y la sensibilidad humana. En 2017 viajó a Francia para continuar especializándose en áreas clave de la salud de la mujer, realizando estudios en acción humanitaria, lactancia materna y reeducación del piso pélvico, además de participar en seminarios sobre fisiología del nacimiento.
+              </p>
+              <p>
+                Clínica La Femme nació de esa misma visión: la de crear un espacio pensado especialmente para acompañar a las mujeres en momentos tan importantes como el embarazo, el posparto y la menopausia, integrando salud física, bienestar emocional y atención especializada. Un lugar creado con amor, compromiso y una mirada integral, donde cada mujer pueda sentirse cuidada, escuchada y acompañada.
+              </p>
+            </div>
             <div className="flex flex-wrap gap-4">
               <Button asChild>
                 <Link to="/turnos">Agendá con la obstetra</Link>
