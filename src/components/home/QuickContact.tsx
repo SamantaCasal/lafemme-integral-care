@@ -17,11 +17,17 @@ const QuickContact = () => {
             <ContactCard icon={Clock} title="Horarios" value={CLINIC_HOURS} />
           </div>
 
-          <div className="rounded-2xl overflow-hidden border border-border bg-muted flex items-center justify-center min-h-[280px]">
-            <div className="text-center text-muted-foreground p-6">
-              <MapPin size={40} className="mx-auto mb-3 text-primary/40" />
-              <p className="text-sm">[Mapa — Insertar embed de Google Maps con la dirección de la clínica]</p>
-            </div>
+          <div className="rounded-2xl overflow-hidden border border-border bg-muted min-h-[280px]">
+            <iframe
+              title="Ubicación de La Femme"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.5!2d-57.6!3d-25.28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da8a0ecb2a3d7%3A0x0!2sCruz%20Del%20Chaco%20877%2C%20Asunci%C3%B3n!5e0!3m2!1ses!2spy!4v1700000000000"
+              width="100%"
+              height="100%"
+              style={{ border: 0, minHeight: "280px" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </div>

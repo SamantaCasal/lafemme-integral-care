@@ -36,7 +36,7 @@ const AppointmentTeaser = () => {
 
         <div className="flex flex-wrap justify-center gap-4">
           <Button asChild size="lg">
-            <Link to="/turnos">Agendar turno</Link>
+            <Link to="/turnos">Solicitar turno</Link>
           </Button>
           <Button asChild size="lg" variant="whatsapp">
             <a href={waUrl} target="_blank" rel="noopener noreferrer">
