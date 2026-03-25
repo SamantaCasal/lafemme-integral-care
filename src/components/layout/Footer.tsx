@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Phone, MapPin, Clock } from "lucide-react";
-import { WHATSAPP_DISPLAY, INSTAGRAM_HANDLE, INSTAGRAM_URL, CLINIC_ADDRESS, CLINIC_HOURS } from "@/data/team";
+import { WHATSAPP_DISPLAY, INSTAGRAM_URL, CLINIC_ADDRESS, CLINIC_HOURS } from "@/data/team";
+import logoImg from "@/assets/logo-lafemme.png";
 
 const Footer = () => {
   return (
@@ -8,10 +9,9 @@ const Footer = () => {
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl font-semibold text-primary">La Femme</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Clínica especializada en embarazo, posparto y menopausia. Acompañamiento integral en cada etapa.
-            </p>
+            <Link to="/">
+              <img src={logoImg} alt="La Femme" className="h-16 w-auto" loading="lazy" width={512} height={512} />
+            </Link>
             <div className="flex gap-3">
               <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Instagram">
                 <Instagram size={18} />
@@ -39,7 +39,9 @@ const Footer = () => {
             <h4 className="font-serif text-lg font-semibold text-foreground">Contacto</h4>
             <div className="space-y-3 text-sm text-muted-foreground">
               <div className="flex items-start gap-2"><Phone size={16} className="mt-0.5 shrink-0 text-primary" /><span>{WHATSAPP_DISPLAY}</span></div>
-              <div className="flex items-start gap-2"><Instagram size={16} className="mt-0.5 shrink-0 text-primary" /><span>{INSTAGRAM_HANDLE}</span></div>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 hover:text-primary transition-colors">
+                <Instagram size={16} className="mt-0.5 shrink-0 text-primary" /><span>@clinicalafemme.py</span>
+              </a>
               <div className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 shrink-0 text-primary" /><span>{CLINIC_ADDRESS}</span></div>
               <div className="flex items-start gap-2"><Clock size={16} className="mt-0.5 shrink-0 text-primary" /><span>{CLINIC_HOURS}</span></div>
             </div>
