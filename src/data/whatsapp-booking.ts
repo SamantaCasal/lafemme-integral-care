@@ -232,7 +232,12 @@ export function buildWhatsAppUrl(data: {
   slots: string[];
   withBaby: string;
   nursery: string;
+  comments?: string;
 }): string {
+  const commentLine = data.comments?.trim()
+    ? `\nComentarios: ${data.comments.trim()}`
+    : "";
+
   const message = `Hola, quiero solicitar un turno para la clínica.
 
 Nombre y apellido: ${data.name}
@@ -241,7 +246,7 @@ Servicio / Especialidad: ${data.service}
 Profesional: ${data.professional}
 Horarios de preferencia: ${data.slots.join(", ")}
 Asiste con bebé: ${data.withBaby}
-Servicio de nursery: ${data.nursery}
+Servicio de nursery: ${data.nursery}${commentLine}
 
 Por favor, necesito coordinación de turno. Gracias.`;
 

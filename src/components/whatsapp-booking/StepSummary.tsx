@@ -79,6 +79,14 @@ const StepSummary = ({ data, service, professionalId, onEdit }: Props) => {
           editKey="baby"
           onEdit={onEdit}
         />
+        {data.comments.trim() && (
+          <SummaryRow
+            label="Comentarios"
+            value={data.comments.trim()}
+            editKey="baby"
+            onEdit={onEdit}
+          />
+        )}
       </div>
     </div>
   );

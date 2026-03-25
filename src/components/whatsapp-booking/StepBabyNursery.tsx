@@ -77,6 +77,22 @@ const StepBabyNursery = ({ data, update }: Props) => {
           </div>
         </div>
       )}
+
+      {/* Comentarios */}
+      <div className="space-y-2">
+        <label htmlFor="comments" className="font-medium text-foreground text-sm">
+          Comentarios u observaciones <span className="text-muted-foreground font-normal">(opcional)</span>
+        </label>
+        <textarea
+          id="comments"
+          value={data.comments}
+          onChange={(e) => update({ comments: e.target.value.slice(0, 500) })}
+          placeholder="Ej: tengo preferencia por turno a las 9, es mi primera consulta, etc."
+          rows={3}
+          className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+        />
+        <p className="text-xs text-muted-foreground text-right">{data.comments.length}/500</p>
+      </div>
     </div>
   );
 };

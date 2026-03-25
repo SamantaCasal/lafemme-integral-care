@@ -23,6 +23,7 @@ export interface WizardData {
   selectedSlots: string[];
   withBaby: "si" | "no" | null;
   nursery: "si" | "no" | "no-aplica" | null;
+  comments: string;
 }
 
 interface Props {
