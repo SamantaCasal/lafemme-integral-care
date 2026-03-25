@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Instagram, Phone, MapPin, Clock } from "lucide-react";
+import { Phone, MapPin, Clock, Instagram } from "lucide-react";
 import { WHATSAPP_DISPLAY, INSTAGRAM_URL, CLINIC_ADDRESS, CLINIC_HOURS } from "@/data/team";
-import logoImg from "@/assets/logo-lafemme.png";
+import logoImg from "@/assets/logo-lafemme.svg";
 
 const Footer = () => {
   return (
