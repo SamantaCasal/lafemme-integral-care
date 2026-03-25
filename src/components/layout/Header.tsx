@@ -45,7 +45,7 @@ const Header = () => {
 
         <div className="hidden lg:flex items-center gap-3">
           <Button asChild size="default">
-            <Link to="/turnos">Agendar turno</Link>
+            <Link to="/turnos">Solicitar turno</Link>
           </Button>
         </div>
 
@@ -81,7 +81,7 @@ const Header = () => {
             ))}
             <div className="pt-3 px-4">
               <Button asChild className="w-full">
-                <Link to="/turnos" onClick={() => setMobileOpen(false)}>Agendar turno</Link>
+                <Link to="/turnos" onClick={() => setMobileOpen(false)}>Solicitar turno</Link>
               </Button>
             </div>
           </nav>

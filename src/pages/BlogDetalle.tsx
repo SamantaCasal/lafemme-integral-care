@@ -60,7 +60,7 @@ const BlogDetalle = () => {
           <div className="mt-12 pt-8 border-t border-border text-center">
             <p className="text-muted-foreground mb-4">¿Querés saber más? Agendá una consulta con nuestro equipo.</p>
             <Button asChild>
-              <Link to="/turnos">Agendar turno</Link>
+              <Link to="/turnos">Solicitar turno</Link>
             </Button>
           </div>
         </div>

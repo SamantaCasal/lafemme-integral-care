@@ -24,7 +24,7 @@ const Footer = () => {
             <nav className="flex flex-col gap-2">
               {[
                 { label: "Especialidades", href: "/especialidades" },
-                { label: "Agendar turno", href: "/turnos" },
+                { label: "Solicitar turno", href: "/turnos" },
                 { label: "Blog", href: "/blog" },
                 { label: "Testimonios", href: "/testimonios" },
                 { label: "Preguntas frecuentes", href: "/faq" },

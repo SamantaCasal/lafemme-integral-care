@@ -24,7 +24,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
             <Button asChild size="lg">
-              <Link to="/turnos">Agendar turno</Link>
+              <Link to="/turnos">Solicitar turno</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="bg-white/90 border-white/40 text-foreground hover:bg-white hover:text-foreground hover:border-white/60">
               <Link to="/especialidades">Ver especialidades</Link>
