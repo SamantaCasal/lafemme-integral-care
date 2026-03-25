@@ -41,6 +41,7 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
     selectedSlots: [],
     withBaby: null,
     nursery: null,
+    comments: "",
   });
 
   const update = useCallback((partial: Partial<WizardData>) => {
