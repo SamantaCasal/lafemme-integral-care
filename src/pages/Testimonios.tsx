@@ -43,12 +43,13 @@ const Testimonios = () => {
         <div className="container max-w-5xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {testimonials.map((item, i) => (
-              <TestimonialCard
+              <div
                 key={item.id}
-                testimonial={item}
                 className={`animate-fade-up ${sizeClasses[i % sizeClasses.length]}`}
-                style-delay={`${i * 0.04}s`}
-              />
+                style={{ animationDelay: `${i * 0.04}s` }}
+              >
+                <TestimonialCard testimonial={item} />
+              </div>
             ))}
           </div>
         </div>
