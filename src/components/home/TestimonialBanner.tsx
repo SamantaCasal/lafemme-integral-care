@@ -1,35 +1,42 @@
 import { Link } from "react-router-dom";
-import { Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { testimonials } from "@/data/testimonials";
+import TestimonialCard from "@/components/testimonials/TestimonialCard";
+import { Button } from "@/components/ui/button";
 
 const TestimonialBanner = () => {
-  const featured = testimonials[0];
+  const featured = testimonials.filter((t) => t.featured).slice(0, 3);
 
   return (
-    <section className="py-12 bg-primary">
-      <Link to="/testimonios" className="block">
-        <div className="container text-center space-y-4 hover:opacity-90 transition-opacity cursor-pointer">
-          <p className="text-primary-foreground/80 text-sm font-medium tracking-widest uppercase">
+    <section className="py-16 md:py-24 bg-accent/30">
+      <div className="container">
+        <div className="text-center mb-10 md:mb-14">
+          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3 font-body">
+            Testimonios reales
+          </p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
             Lo que dicen nuestras pacientes
-          </p>
-          <blockquote className="max-w-2xl mx-auto">
-            <p className="text-primary-foreground text-lg md:text-xl font-serif italic leading-relaxed">
-              "{featured.text}"
-            </p>
-          </blockquote>
-          <div className="flex items-center justify-center gap-1">
-            {Array.from({ length: featured.rating }).map((_, i) => (
-              <Star key={i} size={18} className="fill-primary-foreground text-primary-foreground" />
-            ))}
-          </div>
-          <p className="text-primary-foreground/70 text-sm">
-            — {featured.name}, {featured.stage}
-          </p>
-          <p className="text-primary-foreground/60 text-xs mt-2">
-            Hacé clic para ver más testimonios →
+          </h2>
+          <p className="text-muted-foreground max-w-lg mx-auto font-body">
+            Historias de quienes confiaron en nosotras para acompañarlas en momentos únicos.
           </p>
         </div>
-      </Link>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+          {featured.map((t) => (
+            <TestimonialCard key={t.id} testimonial={t} size="compact" />
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <Button asChild variant="outline" size="lg">
+            <Link to="/testimonios">
+              Ver más testimonios
+              <ArrowRight size={16} />
+            </Link>
+          </Button>
+        </div>
+      </div>
     </section>
   );
 };

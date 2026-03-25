@@ -1,52 +1,74 @@
 import Layout from "@/components/layout/Layout";
 import { testimonials } from "@/data/testimonials";
-import { Star, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WHATSAPP_NUMBER } from "@/data/team";
+import TestimonialCard from "@/components/testimonials/TestimonialCard";
 
 const Testimonios = () => {
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, quiero compartir mi experiencia en La Femme.")}`;
 
+  // Alternate sizing for organic masonry-like feel
+  const sizeClasses = [
+    "md:col-span-2", // wide
+    "",               // normal
+    "",               // normal
+    "",               // normal
+    "md:col-span-2", // wide
+    "",               // normal
+    "",               // normal
+    "",               // normal
+    "md:col-span-2", // wide
+    "",               // normal
+    "",               // normal
+    "",               // normal
+  ];
+
   return (
     <Layout>
-      <section className="py-16 md:py-24 bg-background" id="testimonios">
-        <div className="container">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">Testimonios</h1>
-          <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
-            Lo que dicen nuestras pacientes sobre su experiencia en La Femme.
+      {/* Hero */}
+      <section className="pt-16 pb-10 md:pt-24 md:pb-14 bg-accent/30">
+        <div className="container text-center">
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Testimonios
+          </h1>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto font-body leading-relaxed">
+            Palabras reales de quienes nos eligieron para acompañarlas. Cada historia nos inspira a seguir cuidando con amor.
           </p>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Grid */}
+      <section className="py-12 md:py-20 bg-background">
+        <div className="container max-w-5xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {testimonials.map((item, i) => (
-              <div
+              <TestimonialCard
                 key={item.id}
-                className="p-6 bg-card rounded-xl border border-border space-y-4 animate-fade-up"
-                style={{ animationDelay: `${i * 0.05}s` }}
-              >
-                <div className="flex gap-0.5">
-                  {Array.from({ length: item.rating }).map((_, j) => (
-                    <Star key={j} size={16} className="fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground text-sm leading-relaxed italic">"{item.text}"</p>
-                <div className="pt-2 border-t border-border">
-                  <p className="text-sm font-medium text-foreground">{item.name}</p>
-                  <p className="text-xs text-muted-foreground">{item.stage}</p>
-                </div>
-              </div>
+                testimonial={item}
+                className={`animate-fade-up ${sizeClasses[i % sizeClasses.length]}`}
+                style-delay={`${i * 0.04}s`}
+              />
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="text-center mt-16 p-8 bg-card rounded-2xl border border-border">
-            <h3 className="text-2xl font-semibold text-foreground mb-3">¿Querés compartir tu experiencia?</h3>
-            <p className="text-muted-foreground mb-6">Nos encantaría escucharte. Tu historia puede ayudar a otras mujeres.</p>
-            <Button asChild variant="whatsapp" size="lg">
-              <a href={waUrl} target="_blank" rel="noopener noreferrer">
-                <MessageCircle size={18} />
-                Contanos tu experiencia
-              </a>
-            </Button>
-          </div>
+      {/* CTA */}
+      <section className="py-16 md:py-20 bg-accent/30">
+        <div className="container max-w-2xl text-center">
+          <h3 className="font-heading text-2xl md:text-3xl font-semibold text-foreground mb-3">
+            ¿Querés compartir tu experiencia?
+          </h3>
+          <p className="text-muted-foreground mb-8 font-body leading-relaxed">
+            Tu historia puede inspirar a otras mujeres a dar el paso. Nos encantaría escucharte.
+          </p>
+          <Button asChild variant="whatsapp" size="lg">
+            <a href={waUrl} target="_blank" rel="noopener noreferrer">
+              <MessageCircle size={18} />
+              Contanos tu experiencia
+            </a>
+          </Button>
         </div>
       </section>
     </Layout>
