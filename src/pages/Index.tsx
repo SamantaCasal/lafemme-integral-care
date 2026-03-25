@@ -6,7 +6,6 @@ import DirectorSection from "@/components/home/DirectorSection";
 import TestimonialBanner from "@/components/home/TestimonialBanner";
 import FeaturedServices from "@/components/home/FeaturedServices";
 import AppointmentTeaser from "@/components/home/AppointmentTeaser";
-import BlogPreview from "@/components/home/BlogPreview";
 import QuickContact from "@/components/home/QuickContact";
 
 const Index = () => {
@@ -19,7 +18,6 @@ const Index = () => {
       <TestimonialBanner />
       <FeaturedServices />
       <AppointmentTeaser />
-      <BlogPreview />
       <QuickContact />
     </Layout>
   );
