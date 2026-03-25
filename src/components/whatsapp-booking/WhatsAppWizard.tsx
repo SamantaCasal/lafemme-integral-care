@@ -23,6 +23,7 @@ export interface WizardData {
   selectedSlots: string[];
   withBaby: "si" | "no" | null;
   nursery: "si" | "no" | "no-aplica" | null;
+  comments: string;
 }
 
 interface Props {
@@ -40,6 +41,7 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
     selectedSlots: [],
     withBaby: null,
     nursery: null,
+    comments: "",
   });
 
   const update = useCallback((partial: Partial<WizardData>) => {
@@ -144,6 +146,7 @@ const WhatsAppWizard = ({ preselectedServiceId }: Props) => {
       withBaby: data.withBaby === "si" ? "Sí" : "No",
       nursery:
         data.nursery === "si" ? "Sí" : data.nursery === "no" ? "No" : "No aplica",
+      comments: data.comments,
     });
 
     window.open(url, "_blank", "noopener,noreferrer");
