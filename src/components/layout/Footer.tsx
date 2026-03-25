@@ -25,7 +25,6 @@ const Footer = () => {
               {[
                 { label: "Especialidades", href: "/especialidades" },
                 { label: "Solicitar turno", href: "/turnos" },
-                { label: "Blog", href: "/blog" },
                 { label: "Testimonios", href: "/testimonios" },
                 { label: "Preguntas frecuentes", href: "/faq" },
               ].map((link) => (

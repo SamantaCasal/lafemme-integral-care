@@ -7,9 +7,8 @@ const navLinks = [
   { label: "Inicio", href: "/" },
   { label: "Nuestro equipo", href: "/quienes-somos" },
   { label: "Especialidades", href: "/especialidades" },
-  { label: "Blog", href: "/blog" },
   { label: "Testimonios", href: "/testimonios" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Preguntas frecuentes", href: "/faq" },
   { label: "Contacto", href: "/contacto" },
 ];
 
